@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ronjhay Pagador | Full-Stack Web Developer & API Integrator</title>
+  <title>Ronjhay Pagador | Full-Stack Web Developer</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -22,7 +22,7 @@
     }
     .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* Dark Mode Glass Cards */
+    /* Dark Mode Cards */
     .dark .glass-card {
       background: rgba(13, 15, 24, 0.78);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -34,23 +34,23 @@
       box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.2);
     }
 
-    /* Light Mode Clean Cards */
+    /* Light Mode Cards */
     .glass-card {
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(226, 232, 240, 0.9);
       color: #334155;
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .glass-card:hover {
       border-color: rgba(99, 102, 241, 0.4);
       transform: translateY(-4px);
-      box-shadow: 0 16px 35px -10px rgba(99, 102, 241, 0.15);
+      box-shadow: 0 16px 35px -10px rgba(99, 102, 241, 0.12);
     }
 
-    /* Ambient Glowing Blobs */
+    /* Moving Glowing Blobs */
     @keyframes floatBlob {
       0%, 100% { transform: translate(0px, 0px) scale(1); }
       33% { transform: translate(50px, -60px) scale(1.1); }
@@ -58,6 +58,23 @@
     }
     .animate-blob-1 { animation: floatBlob 16s ease-in-out infinite; }
     .animate-blob-2 { animation: floatBlob 20s ease-in-out infinite reverse; }
+
+    /* Concentric Radar Rings */
+    @keyframes pulseRing {
+      0%, 100% { transform: scale(1); opacity: 0.25; }
+      50% { transform: scale(1.04); opacity: 0.45; }
+    }
+    .animate-ring {
+      animation: pulseRing 6s ease-in-out infinite;
+    }
+
+    /* Floating Badges */
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .float-item-1 { animation: floatBadge 4s ease-in-out infinite; }
+    .float-item-2 { animation: floatBadge 5s ease-in-out infinite 1.5s; }
 
     /* Preloader Spinner */
     @keyframes spinBorder {
@@ -76,32 +93,6 @@
       transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1) !important;
     }
 
-    /* 3D Hanging Lanyard */
-    .badge-perspective {
-      perspective: 1000px;
-    }
-    #idBadgeCard {
-      transform-style: preserve-3d;
-      transform-origin: top center;
-      transition: transform 0.12s ease-out;
-      cursor: grab;
-      user-select: none;
-    }
-    #idBadgeCard:active {
-      cursor: grabbing;
-    }
-    .lanyard-strap {
-      background: repeating-linear-gradient(
-        0deg,
-        #4f46e5,
-        #4f46e5 8px,
-        #312e81 8px,
-        #312e81 16px
-      );
-      box-shadow: 0 0 12px rgba(99, 102, 241, 0.35);
-    }
-
-    /* Typewriter Cursor */
     .cursor-blink {
       animation: blink 1s infinite;
     }
@@ -113,14 +104,13 @@
 </head>
 <body class="bg-[#f8fafc] dark:bg-[#06070a] text-slate-800 dark:text-slate-300 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white transition-colors duration-300">
 
-  <!-- ================= PRELOADER (6 SECONDS) ================= -->
   <div id="preloader" class="fixed inset-0 bg-[#06070a] z-[99999] flex flex-col justify-between items-center p-8 sm:p-12 transition-all duration-700">
     <div class="w-full max-w-4xl flex items-center justify-between text-xs font-mono text-slate-500 uppercase tracking-widest border-b border-white/5 pb-4">
       <div class="flex items-center gap-2">
         <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-ping"></span>
         <span class="text-slate-300 font-bold">RONJHAY PAGADOR</span>
       </div>
-      <div class="text-emerald-400 font-bold">ONLINE</div>
+      <div class="text-emerald-400 font-bold">AVAILABLE</div>
     </div>
 
     <div class="flex flex-col items-center justify-center space-y-6 my-auto">
@@ -139,7 +129,7 @@
           PHP BACKEND
         </h2>
         <p id="toolDetail" class="text-[11px] font-mono text-indigo-400 tracking-widest uppercase">
-          Initializing runtime...
+          Loading stack...
         </p>
       </div>
 
@@ -150,30 +140,28 @@
           <span class="w-2 h-2 rounded-full bg-emerald-500/60"></span>
           <span class="ml-1 text-slate-400">terminal</span>
         </div>
-        <p class="text-slate-400 truncate"><span class="text-emerald-400">system:</span> <span id="terminalLog">Mounting environment...</span></p>
+        <p class="text-slate-400 truncate"><span class="text-emerald-400">status:</span> <span id="terminalLog">Getting things ready...</span></p>
       </div>
     </div>
 
     <div class="w-full max-w-4xl flex items-center justify-between text-xs font-mono text-slate-500 border-t border-white/5 pt-4">
-      <span>INITIALIZING</span>
+      <span>STARTING UP</span>
       <span class="text-slate-400 font-bold">READY</span>
     </div>
   </div>
 
-  <!-- Background Moving Particles & Ambient Glow -->
   <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
   <div class="fixed top-[-10%] left-[-5%] w-[550px] h-[550px] bg-indigo-500/10 dark:bg-indigo-600/15 blur-[140px] pointer-events-none rounded-full animate-blob-1 z-0"></div>
-  <div class="fixed top-[45%] right-[-5%] w-[500px] h-[500px] bg-purple-500/10 dark:bg-purple-600/10 blur-[140px] pointer-events-none rounded-full animate-blob-2 z-0"></div>
+  <div class="fixed top-[45%] right-[-5%] w-[500px] h-[500px] bg-cyan-500/10 dark:bg-cyan-600/10 blur-[140px] pointer-events-none rounded-full animate-blob-2 z-0"></div>
 
-  <!-- Floating Navigation Bar -->
   <header class="fixed top-5 left-0 w-full z-50 px-4">
-    <nav class="max-w-4xl mx-auto h-14 rounded-full glass-card px-6 flex items-center justify-between shadow-xl">
-      <a href="#home" class="text-sm font-extrabold tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
+    <nav class="max-w-5xl mx-auto h-14 rounded-full glass-card px-6 flex items-center justify-between shadow-xl">
+      <a href="#home" class="text-sm font-black tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
         <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse shadow-[0_0_8px_#6366f1]"></span>
-        RONJHAY
+        RONJHAY<span class="text-indigo-600 dark:text-indigo-400">.DEV</span>
       </a>
       
-      <div class="hidden sm:flex items-center gap-6 text-xs font-semibold text-slate-600 dark:text-slate-400">
+      <div class="hidden sm:flex items-center gap-7 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
         <a href="#home" class="hover:text-indigo-600 dark:hover:text-white transition">Home</a>
         <a href="#skills" class="hover:text-indigo-600 dark:hover:text-white transition">Stack</a>
         <a href="#about" class="hover:text-indigo-600 dark:hover:text-white transition">About</a>
@@ -181,104 +169,85 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <!-- Theme Toggle Button -->
         <button id="themeToggle" class="w-8 h-8 rounded-full flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/10 transition" title="Toggle Light/Dark mode">
           <i id="themeIcon" class="fas fa-sun text-sm text-amber-500"></i>
         </button>
 
-        <a href="#contact" class="px-4 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition shadow-lg shadow-indigo-600/30">
+        <a href="#contact" class="px-5 py-2 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-wider transition shadow-lg shadow-indigo-600/30">
           Let's Talk <i class="fas fa-arrow-right text-[10px] ml-1"></i>
         </a>
       </div>
     </nav>
   </header>
 
-  <!-- Main Content Container -->
-  <main class="relative z-10 max-w-6xl mx-auto px-6 space-y-24 pb-20">
+  <main class="relative z-10 max-w-6xl mx-auto px-6 space-y-28 pb-20">
 
-    <!-- HERO SECTION -->
     <section id="home" class="scroll-mt-32 pt-28">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         
-        <!-- Left: High-Converting Client Pitch -->
-        <div class="lg:col-span-7 glass-card rounded-3xl p-8 sm:p-10 flex flex-col justify-between space-y-6">
-          <div class="space-y-4">
-            
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[11px] font-semibold tracking-wide uppercase">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
-              Available for Freelance & Custom Web Systems
-            </div>
+        <div class="lg:col-span-7 space-y-6">
+          
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold font-mono tracking-widest uppercase">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span> Available for Projects & Freelance
+          </div>
 
-            <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
-              I am Ronjhay Pagador
+          <div class="space-y-1">
+            <h1 class="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight uppercase leading-none">
+              HEY! I'M RONJHAY
             </h1>
-
-            <!-- Continuous Typewriter Effect -->
-            <div class="text-xl sm:text-2xl font-bold text-indigo-600 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-indigo-400 dark:via-purple-300 dark:to-cyan-400 h-8 flex items-center">
+            
+            <div class="text-2xl sm:text-4xl font-extrabold text-indigo-600 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-indigo-400 dark:via-purple-300 dark:to-cyan-400 h-10 flex items-center">
               <span id="typewriter"></span>
               <span class="cursor-blink text-indigo-500 dark:text-indigo-400 ml-1">|</span>
             </div>
-
-            <!-- Client-Centric Motivating Pitch -->
-            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl">
-              I transform complex business operations into high-performing web platforms. From custom multi-role management portals and secure database architectures to seamless third-party <strong class="text-indigo-600 dark:text-indigo-300">RESTful API integrations</strong>, I build digital solutions that automate workflows, protect sensitive data, and scale your business effortlessly.
-            </p>
           </div>
 
-          <div class="space-y-4 pt-4 border-t border-slate-200 dark:border-white/5">
-            <div class="flex flex-wrap items-center gap-3">
-              <a href="#projects" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
-                Explore Case Studies <i class="fas fa-arrow-right text-[10px]"></i>
-              </a>
-              <a href="#contact" class="px-6 py-3 rounded-xl bg-slate-100 dark:bg-white/[0.04] border border-slate-300 dark:border-white/10 hover:border-slate-400 dark:hover:border-white/20 text-slate-800 dark:text-slate-200 text-xs font-semibold transition">
-                Start a Project
-              </a>
-            </div>
+          <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl font-normal">
+            I help people and businesses turn their project ideas into real, working web applications. I focus on building solid backend systems using PHP and MySQL, connecting reliable APIs, and making sure the website looks clean, fast, and easy to use on any device.
+          </p>
 
-            <div class="flex items-center gap-3 pt-2">
-              <a href="https://github.com/ronjhay7" target="_blank" class="w-9 h-9 rounded-xl glass-card flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white hover:border-indigo-500/50 transition text-sm">
-                <i class="fab fa-github"></i>
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#contact" class="px-7 py-3.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-wider transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+              Let's Work Together <i class="fas fa-arrow-right text-[11px]"></i>
+            </a>
+
+            <div class="flex items-center gap-2.5 pl-2">
+              <a href="https://github.com/ronjhay7" target="_blank" class="w-10 h-10 rounded-full bg-slate-200/80 dark:bg-white/10 hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-600 text-slate-700 dark:text-white flex items-center justify-center transition shadow-sm" title="GitHub">
+                <i class="fab fa-github text-sm"></i>
               </a>
-              <a href="mailto:ronjhay@example.com" class="w-9 h-9 rounded-xl glass-card flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white hover:border-indigo-500/50 transition text-sm">
-                <i class="fas fa-envelope"></i>
+              <a href="mailto:ronjhay@example.com" class="w-10 h-10 rounded-full bg-slate-200/80 dark:bg-white/10 hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-600 text-slate-700 dark:text-white flex items-center justify-center transition shadow-sm" title="Email">
+                <i class="fas fa-envelope text-sm"></i>
               </a>
             </div>
           </div>
+
         </div>
 
-        <!-- Right: 3D Hanging Lanyard ID Pass -->
-        <div class="lg:col-span-5 flex flex-col items-center justify-center badge-perspective relative py-6">
+        <div class="lg:col-span-5 relative flex items-center justify-center py-4">
           
-          <div class="flex flex-col items-center z-20">
-            <div class="w-7 h-20 lanyard-strap rounded-t-sm shadow-md"></div>
-            <div class="w-6 h-3 bg-gradient-to-r from-slate-400 via-slate-200 to-slate-400 rounded-sm shadow"></div>
-            <div class="w-2.5 h-3.5 bg-slate-400 rounded-full border border-slate-600 -mt-1"></div>
-            <div class="w-8 h-3.5 bg-slate-900 border border-white/20 rounded-md -mt-1.5 flex items-center justify-center shadow-md">
-              <div class="w-4 h-1.5 bg-black rounded-full"></div>
+          <div class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full border border-indigo-500/20 dark:border-indigo-500/30 animate-ring pointer-events-none"></div>
+          <div class="absolute w-56 h-56 sm:w-80 sm:h-80 rounded-full border border-dashed border-indigo-500/25 dark:border-cyan-400/20 pointer-events-none"></div>
+          <div class="absolute w-44 h-44 sm:w-64 sm:h-64 rounded-full bg-indigo-600/15 dark:bg-indigo-500/20 blur-3xl pointer-events-none"></div>
+
+          <div class="relative w-64 h-80 sm:w-72 sm:h-96 rounded-3xl overflow-hidden glass-card p-2 border-slate-300 dark:border-indigo-500/40 shadow-2xl z-10 group">
+            <img src="profile.jpg" alt="Ronjhay Pagador" class="w-full h-full object-cover object-top rounded-2xl group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80'" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-2xl"></div>
+            
+            <div class="absolute bottom-4 left-4 right-4 text-center">
+              <span class="text-xs font-mono font-bold bg-slate-900/80 backdrop-blur-md text-emerald-400 px-3 py-1 rounded-full border border-emerald-500/30">
+                ● Ready to build
+              </span>
             </div>
           </div>
 
-          <div id="idBadgeCard" class="w-64 sm:w-72 glass-card rounded-3xl p-5 border-slate-300 dark:border-indigo-500/30 shadow-2xl relative flex flex-col items-center -mt-1 bg-white/95 dark:bg-gradient-to-b dark:from-[#151928]/95 dark:to-[#0a0c14]/98">
-            
-            <div class="w-full flex items-center justify-between text-[10px] font-mono text-indigo-600 dark:text-indigo-400 uppercase tracking-widest pb-3 border-b border-slate-200 dark:border-white/10">
-              <span class="font-bold">DEV // PASS</span>
-              <span class="text-emerald-500 flex items-center gap-1 font-semibold">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> VERIFIED
-              </span>
-            </div>
+          <div class="absolute -top-2 right-2 sm:right-6 glass-card px-3.5 py-2 rounded-2xl flex items-center gap-2 shadow-xl z-20 float-item-1 border border-indigo-500/30">
+            <i class="fab fa-php text-indigo-500 text-lg"></i>
+            <span class="text-xs font-bold text-slate-800 dark:text-white">PHP Backend</span>
+          </div>
 
-            <div class="relative w-44 h-52 rounded-2xl overflow-hidden border border-slate-200 dark:border-white/15 shadow-inner mt-3 group">
-              <img src="profile.jpg" alt="Ronjhay Pagador" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80'" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-              <div class="absolute bottom-2 left-2 right-2 text-center">
-                <span class="text-[10px] font-mono bg-indigo-600/90 backdrop-blur-md px-2.5 py-0.5 rounded text-white font-bold uppercase tracking-wider">Full-Stack Dev</span>
-              </div>
-            </div>
-
-            <div class="mt-4 text-center">
-              <h3 class="text-xl font-extrabold text-slate-900 dark:text-white tracking-wide">Ronjhay</h3>
-            </div>
-
+          <div class="absolute bottom-2 left-0 sm:left-4 glass-card px-3.5 py-2 rounded-2xl flex items-center gap-2 shadow-xl z-20 float-item-2 border border-blue-500/30">
+            <i class="fas fa-plug text-cyan-500 text-sm"></i>
+            <span class="text-xs font-bold text-slate-800 dark:text-white">API Integration</span>
           </div>
 
         </div>
@@ -286,109 +255,102 @@
       </div>
     </section>
 
-    <!-- CORE TECH & API STACK SECTION -->
     <section id="skills" class="scroll-mt-28 space-y-4">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
           <span class="w-6 h-[2px] bg-indigo-500"></span>
-          <h2 class="text-xs font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Technical Expertise & APIs</h2>
+          <h2 class="text-xs font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400">What I Work With</h2>
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
-        <!-- Skill 1: PHP & REST APIs -->
         <div class="glass-card rounded-3xl p-6 space-y-3 group">
           <div class="flex items-center justify-between">
             <i class="fab fa-php text-3xl text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition"></i>
             <span class="text-xs font-mono text-indigo-600 dark:text-indigo-400 font-bold">95%</span>
           </div>
-          <h4 class="text-sm font-bold text-slate-900 dark:text-white">PHP & RESTful APIs</h4>
-          <p class="text-xs text-slate-600 dark:text-slate-400">Custom API endpoints, JSON routing, sessions & secure authentication logic</p>
+          <h4 class="text-sm font-bold text-slate-900 dark:text-white">PHP & Custom APIs</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400">Handling server logic, secure logins, and creating custom API endpoints</p>
         </div>
 
-        <!-- Skill 2: MySQL -->
         <div class="glass-card rounded-3xl p-6 space-y-3 group">
           <div class="flex items-center justify-between">
             <i class="fas fa-database text-2xl text-blue-600 dark:text-blue-400 group-hover:scale-110 transition"></i>
             <span class="text-xs font-mono text-blue-600 dark:text-blue-400 font-bold">92%</span>
           </div>
           <h4 class="text-sm font-bold text-slate-900 dark:text-white">MySQL Database</h4>
-          <p class="text-xs text-slate-600 dark:text-slate-400">High-performance relational schema design, data sanitization & optimization</p>
+          <p class="text-xs text-slate-600 dark:text-slate-400">Designing clean relational tables and writing fast, secure database queries</p>
         </div>
 
-        <!-- Skill 3: Firebase -->
         <div class="glass-card rounded-3xl p-6 space-y-3 group">
           <div class="flex items-center justify-between">
             <i class="fas fa-fire text-2xl text-amber-600 dark:text-amber-500 group-hover:scale-110 transition"></i>
             <span class="text-xs font-mono text-amber-600 dark:text-amber-500 font-bold">90%</span>
           </div>
-          <h4 class="text-sm font-bold text-slate-900 dark:text-white">Firebase Cloud APIs</h4>
-          <p class="text-xs text-slate-600 dark:text-slate-400">Realtime Database synchronization, Firebase Auth & Storage integration</p>
+          <h4 class="text-sm font-bold text-slate-900 dark:text-white">Firebase Services</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400">Realtime data sync, user authentication, and cloud file storage</p>
         </div>
 
-        <!-- Skill 4: Tailwind CSS & Fetch API -->
         <div class="glass-card rounded-3xl p-6 space-y-3 group">
           <div class="flex items-center justify-between">
             <i class="fab fa-css3-alt text-3xl text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition"></i>
             <span class="text-xs font-mono text-cyan-600 dark:text-cyan-400 font-bold">94%</span>
           </div>
-          <h4 class="text-sm font-bold text-slate-900 dark:text-white">Tailwind & Async UI</h4>
-          <p class="text-xs text-slate-600 dark:text-slate-400">Dynamic JavaScript Fetch API, mobile-first responsiveness & UI systems</p>
+          <h4 class="text-sm font-bold text-slate-900 dark:text-white">Tailwind CSS & JS</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400">Building smooth, modern, and mobile-friendly user interfaces</p>
         </div>
 
       </div>
     </section>
 
-    <!-- ABOUT SECTION (Client Pitch & Business Value) -->
     <section id="about" class="scroll-mt-28 space-y-6">
       <div class="flex items-center gap-3">
         <span class="w-6 h-[2px] bg-indigo-500"></span>
-        <h2 class="text-xs font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Why Work With Me</h2>
+        <h2 class="text-xs font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400">About Me</h2>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div class="lg:col-span-8 glass-card rounded-3xl p-8 space-y-4">
-          <h3 class="text-2xl font-bold text-slate-900 dark:text-white leading-snug">Bridging business logic with clean, scalable code that delivers measurable results.</h3>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white leading-snug">I enjoy building things that actually work and make people's lives easier.</h3>
           <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-            I don't just build websites; I engineer dependable digital infrastructure tailored to solve real operational bottlenecks. Whether you need a centralized management console, automated third-party API data pipelines, or a fast customer-facing web application, I ensure your platform is secure, fast, and structured for long-term growth.
+            I’m a developer who cares about both the code under the hood and how the user experiences it. Whether it's creating an apartment hunting system with different access levels for admins and tenants, or setting up a real-time booking app, my goal is simple: deliver clean, reliable software that gets the job done without headaches.
           </p>
           <div class="pt-2 flex flex-wrap gap-2 text-xs font-mono">
-            <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">REST API Integration</span>
-            <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">PHP PDO</span>
-            <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">MySQL Architecture</span>
-            <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">Firebase Realtime Sync</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">API Integration</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">PHP</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">MySQL</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">Firebase</span>
             <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">Tailwind CSS</span>
-            <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">Version Control (Git)</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">Git / GitHub</span>
           </div>
         </div>
 
         <div class="lg:col-span-4 glass-card rounded-3xl p-8 flex flex-col justify-between space-y-4">
-          <h4 class="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">Client Guarantees</h4>
+          <h4 class="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">What You Can Expect</h4>
           <ul class="space-y-3 text-xs text-slate-700 dark:text-slate-300">
             <li class="flex items-center gap-2">
-              <i class="fas fa-check-circle text-emerald-500"></i> Strict Data Sanitization & Security
+              <i class="fas fa-check text-emerald-500"></i> Clear communication throughout the build
             </li>
             <li class="flex items-center gap-2">
-              <i class="fas fa-check-circle text-emerald-500"></i> Seamless Third-Party API Data Sync
+              <i class="fas fa-check text-emerald-500"></i> Secure, well-tested database queries
             </li>
             <li class="flex items-center gap-2">
-              <i class="fas fa-check-circle text-emerald-500"></i> High-Speed Mobile & Desktop UX
+              <i class="fas fa-check text-emerald-500"></i> Smooth mobile & desktop experience
             </li>
             <li class="flex items-center gap-2">
-              <i class="fas fa-check-circle text-emerald-500"></i> Clean, Maintainable & Documented Code
+              <i class="fas fa-check text-emerald-500"></i> Clean code that's easy to maintain
             </li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS SECTION -->
     <section id="projects" class="scroll-mt-28 space-y-6">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
           <span class="w-6 h-[2px] bg-indigo-500"></span>
-          <h2 class="text-xs font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Featured Platforms</h2>
+          <h2 class="text-xs font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Featured Projects</h2>
         </div>
         <a href="https://github.com/ronjhay7" target="_blank" class="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition flex items-center gap-1">
           GitHub Profile <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
@@ -397,70 +359,68 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <!-- Project 1: Apartment Hunting System -->
         <div class="glass-card rounded-3xl p-8 flex flex-col justify-between space-y-6 group">
           <div class="space-y-4">
             <div class="flex items-center justify-between text-xs text-slate-500 font-mono">
-              <span class="text-indigo-600 dark:text-indigo-400">01 / Full-Stack Platform</span>
+              <span class="text-indigo-600 dark:text-indigo-400">Full-Stack Web App</span>
               <span>PHP / MySQL / API</span>
             </div>
             
             <h3 class="text-2xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition">
-              Apartment Hunting & Property Management System
+              Apartment Hunting & Property Management
             </h3>
             
             <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Rental marketplace platform engineered with dynamic search and location filters, 3-tier role authorization (Tenant, Landlord, Admin), landlord document verification flows, and administrative management controls.
+              A rental discovery platform where tenants can filter listings, landlords can submit their properties for verification, and admins have full control over approvals and listings.
             </p>
 
             <div class="flex flex-wrap gap-2 pt-2 text-[11px] font-mono">
-              <span class="px-2.5 py-1 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">PHP (PDO)</span>
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">PHP</span>
               <span class="px-2.5 py-1 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">MySQL</span>
-              <span class="px-2.5 py-1 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">REST Endpoints</span>
+              <span class="px-2.5 py-1 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">REST APIs</span>
               <span class="px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">Tailwind CSS</span>
             </div>
           </div>
 
           <div class="pt-4 border-t border-slate-200 dark:border-white/5 flex items-center justify-between">
             <a href="https://github.com/ronjhay7/apartment-hunting-web-app" target="_blank" class="text-xs font-bold text-slate-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center gap-2">
-              View Repository <i class="fas fa-arrow-right text-[10px]"></i>
+              View on GitHub <i class="fas fa-arrow-right text-[10px]"></i>
             </a>
             <span class="text-[11px] font-mono text-emerald-500 flex items-center gap-1.5 font-semibold">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Production Code
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Working Project
             </span>
           </div>
         </div>
 
-        <!-- Project 2: HealthConsult -->
         <div class="glass-card rounded-3xl p-8 flex flex-col justify-between space-y-6 group">
           <div class="space-y-4">
             <div class="flex items-center justify-between text-xs text-slate-500 font-mono">
-              <span class="text-amber-600 dark:text-amber-400">02 / Telehealth Platform</span>
+              <span class="text-amber-600 dark:text-amber-400">Healthcare App</span>
               <span>Firebase / Cloud API</span>
             </div>
             
             <h3 class="text-2xl font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-300 transition">
-              HealthConsult Consultation Platform
+              HealthConsult Platform
             </h3>
             
             <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Healthcare management and consultation web platform featuring doctor appointment scheduling, real-time availability tracking, patient consultation workflows, and live Firebase Cloud API synchronization.
+              A healthcare web application for booking doctor appointments, checking doctor availability in real-time, and keeping track of consultation schedules smoothly.
             </p>
 
             <div class="flex flex-wrap gap-2 pt-2 text-[11px] font-mono">
               <span class="px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">Firebase RTDB</span>
-              <span class="px-2.5 py-1 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">Cloud Auth API</span>
+              <span class="px-2.5 py-1 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">Auth API</span>
               <span class="px-2.5 py-1 rounded-lg bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border border-yellow-500/20">JavaScript</span>
-              <span class="px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">Tailwind CSS</span>
+              <span class="px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Tailwind CSS</span>
             </div>
           </div>
 
           <div class="pt-4 border-t border-slate-200 dark:border-white/5 flex items-center justify-between">
             <a href="https://github.com/ronjhay7" target="_blank" class="text-xs font-bold text-slate-900 dark:text-white hover:text-amber-600 dark:hover:text-amber-400 transition flex items-center gap-2">
-              Explore Project <i class="fas fa-arrow-right text-[10px]"></i>
+              View on GitHub <i class="fas fa-arrow-right text-[10px]"></i>
             </a>
             <span class="text-[11px] font-mono text-slate-500 flex items-center gap-1.5">
-              Live Architecture
+              Live Project
             </span>
           </div>
         </div>
@@ -468,34 +428,32 @@
       </div>
     </section>
 
-    <!-- CONTACT SECTION -->
     <section id="contact" class="scroll-mt-28 glass-card rounded-3xl p-8 sm:p-12 text-center space-y-6 border-indigo-500/20">
       <div class="max-w-xl mx-auto space-y-3">
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Let's Build Something Exceptional</h2>
+        <h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Got a project in mind?</h2>
         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-          Have an upcoming project, a custom management platform in mind, or need seamless API integrations? Let's turn your ideas into functional reality.
+          Whether you need a custom web system built from scratch, database work, or API integrations, feel free to reach out. Let's talk!
         </p>
       </div>
 
       <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
-        <a href="mailto:ronjhay@example.com" class="px-8 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
-          <i class="fas fa-envelope"></i> Get in Touch
+        <a href="mailto:ronjhay@example.com" class="px-8 py-3.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-wider transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+          <i class="fas fa-envelope"></i> Send an Email
         </a>
-        <a href="https://github.com/ronjhay7" target="_blank" class="px-8 py-3.5 rounded-2xl bg-slate-100 dark:bg-white/[0.04] border border-slate-300 dark:border-white/10 hover:border-slate-400 dark:hover:border-white/20 text-slate-800 dark:text-white text-xs font-semibold transition flex items-center gap-2">
-          <i class="fab fa-github"></i> GitHub Profile
+        <a href="https://github.com/ronjhay7" target="_blank" class="px-8 py-3.5 rounded-full bg-slate-100 dark:bg-white/[0.04] border border-slate-300 dark:border-white/10 hover:border-slate-400 dark:hover:border-white/20 text-slate-800 dark:text-white text-xs font-bold uppercase tracking-wider transition flex items-center gap-2">
+          <i class="fab fa-github"></i> View GitHub
         </a>
       </div>
 
       <div class="pt-8 border-t border-slate-200 dark:border-white/5 text-xs text-slate-500">
-        © 2026 Ronjhay Pagador. All rights reserved.
+        © 2026 Ronjhay Pagador.
       </div>
     </section>
 
   </main>
 
-  <!-- ================= SCRIPTS ================= -->
   <script>
-    // 1. THEME ENGINE
+    // 1. THEME TOGGLE
     (function() {
       const themeToggle = document.getElementById('themeToggle');
       const themeIcon = document.getElementById('themeIcon');
@@ -523,9 +481,9 @@
       });
     })();
 
-    // 2. TYPEWRITER EFFECT (Full-Stack Web Developer)
+    // 2. CONTINUOUS TYPEWRITER
     (function() {
-      const targetText = "Full-Stack Web Developer";
+      const targetText = "FULL-STACK WEB DEVELOPER";
       let charIndex = 0;
       let isDeleting = false;
       const typewriterElement = document.getElementById("typewriter");
@@ -555,7 +513,7 @@
       setTimeout(typeLoop, 1000);
     })();
 
-    // 3. PRELOADER (6s)
+    // 3. PRELOADER (6 SECONDS)
     (function() {
       const preloader = document.getElementById('preloader');
       const loadPercent = document.getElementById('loadPercent');
@@ -565,12 +523,12 @@
       const terminalLog = document.getElementById('terminalLog');
 
       const tools = [
-        { icon: 'fab fa-php text-indigo-400', name: 'PHP & REST APIs', detail: 'Server-side API architecture...', log: 'Mounting PHP session & REST endpoints...' },
-        { icon: 'fas fa-database text-blue-400', name: 'MYSQL DATABASE', detail: 'Relational data structures...', log: 'Executing schema & query optimization...' },
-        { icon: 'fas fa-fire text-amber-500', name: 'FIREBASE CLOUD', detail: 'Cloud realtime synchronization...', log: 'Connecting Firebase Realtime DB & Auth...' },
-        { icon: 'fab fa-css3-alt text-cyan-400', name: 'TAILWIND CSS', detail: 'Modern UI & layout engine...', log: 'Compiling responsive utility classes...' },
-        { icon: 'fab fa-js text-yellow-400', name: 'JAVASCRIPT FETCH API', detail: 'Dynamic asynchronous UI...', log: 'Injecting async API event handlers...' },
-        { icon: 'fab fa-github text-slate-200', name: 'GIT & REPOSITORIES', detail: 'Production release ready...', log: 'Finalizing production build -> SUCCESS' }
+        { icon: 'fab fa-php text-indigo-400', name: 'PHP & APIS', detail: 'Server logic...', log: 'Starting PHP backend...' },
+        { icon: 'fas fa-database text-blue-400', name: 'MYSQL DATABASE', detail: 'Data storage...', log: 'Checking database tables...' },
+        { icon: 'fas fa-fire text-amber-500', name: 'FIREBASE CLOUD', detail: 'Realtime sync...', log: 'Connecting Firebase...' },
+        { icon: 'fab fa-css3-alt text-cyan-400', name: 'TAILWIND CSS', detail: 'Responsive UI...', log: 'Loading UI styles...' },
+        { icon: 'fab fa-js text-yellow-400', name: 'JAVASCRIPT', detail: 'Interactions...', log: 'Setting up frontend...' },
+        { icon: 'fab fa-github text-slate-200', name: 'GITHUB REPO', detail: 'Ready...', log: 'All systems ready!' }
       ];
 
       let startTime = Date.now();
@@ -668,59 +626,6 @@
       window.addEventListener('resize', init);
       init();
       render();
-    })();
-
-    // 5. 3D HANGING LANYARD PHYSICS
-    (function() {
-      const card = document.getElementById('idBadgeCard');
-      if (!card) return;
-
-      let isDragging = false;
-      let startX, startY;
-
-      function setAngle(x, y, z) {
-        card.style.transform = `rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
-      }
-
-      card.parentElement.addEventListener('mousemove', (e) => {
-        if (isDragging) return;
-        const rect = card.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        const deltaX = (e.clientX - centerX) / 12;
-        const deltaY = (e.clientY - centerY) / 16;
-
-        setAngle(-deltaY, deltaX, deltaX * 0.4);
-      });
-
-      card.parentElement.addEventListener('mouseleave', () => {
-        if (isDragging) return;
-        card.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-        setAngle(0, 0, 0);
-        setTimeout(() => { card.style.transition = 'transform 0.12s ease-out'; }, 600);
-      });
-
-      card.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.clientX;
-        startY = e.clientY;
-      });
-
-      window.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        const dragX = (e.clientX - startX) / 6;
-        const dragY = (e.clientY - startY) / 8;
-        setAngle(-dragY, dragX, dragX * 0.6);
-      });
-
-      window.addEventListener('mouseup', () => {
-        if (!isDragging) return;
-        isDragging = false;
-        card.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-        setAngle(0, 0, 0);
-        setTimeout(() => { card.style.transition = 'transform 0.12s ease-out'; }, 800);
-      });
     })();
   </script>
 
