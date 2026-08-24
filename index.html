@@ -3,144 +3,217 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ronjhay | Full-Stack Software Developer</title>
+  <title>Ronjhay | Full-Stack Web Developer</title>
   
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Font Awesome Icons & Google Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #08090d;
+      background-color: #07080c;
     }
-    .font-mono {
-      font-family: 'JetBrains Mono', monospace;
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* Moving Glowing Blob Animations */
+    @keyframes floatBlob {
+      0%, 100% { transform: translate(0px, 0px) scale(1); }
+      33% { transform: translate(60px, -80px) scale(1.15); }
+      66% { transform: translate(-50px, 50px) scale(0.9); }
     }
-    .glass-panel {
-      background: rgba(15, 17, 26, 0.75);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    .animate-blob-1 { animation: floatBlob 18s ease-in-out infinite; }
+    .animate-blob-2 { animation: floatBlob 22s ease-in-out infinite reverse; }
+    .animate-blob-3 { animation: floatBlob 20s ease-in-out infinite 2s; }
+
+    .glass-card {
+      background: rgba(14, 16, 26, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .glass-panel:hover {
-      border-color: rgba(99, 102, 241, 0.35);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.15);
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 35px -10px rgba(99, 102, 241, 0.25);
     }
-    .grid-bg {
-      background-size: 40px 40px;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+
+    @keyframes soundwave {
+      0%, 100% { height: 6px; }
+      50% { height: 22px; }
     }
+    .bar-1 { animation: soundwave 1.1s ease-in-out infinite; }
+    .bar-2 { animation: soundwave 0.8s ease-in-out infinite 0.2s; }
+    .bar-3 { animation: soundwave 1.3s ease-in-out infinite 0.4s; }
+    .bar-4 { animation: soundwave 0.9s ease-in-out infinite 0.1s; }
+    .bar-5 { animation: soundwave 1.2s ease-in-out infinite 0.3s; }
   </style>
 </head>
-<body class="text-slate-300 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white grid-bg">
+<body class="text-slate-300 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
 
-  <!-- Ambient Glowing Orbs -->
-  <div class="fixed top-[-15%] left-[-10%] w-[600px] h-[600px] bg-indigo-600/15 blur-[160px] pointer-events-none rounded-full"></div>
-  <div class="fixed top-[40%] right-[-10%] w-[500px] h-[500px] bg-purple-600/10 blur-[150px] pointer-events-none rounded-full"></div>
-  <div class="fixed bottom-[-10%] left-[20%] w-[500px] h-[500px] bg-blue-600/10 blur-[150px] pointer-events-none rounded-full"></div>
+  <!-- ================= MOVING CANVAS BACKGROUND ================= -->
+  <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <!-- ================= ANIMATED GLOWING GRADIENT BLOBS ================= -->
+  <div class="fixed top-[-10%] left-[-5%] w-[550px] h-[550px] bg-indigo-600/20 blur-[150px] pointer-events-none rounded-full animate-blob-1 z-0"></div>
+  <div class="fixed top-[45%] right-[-5%] w-[500px] h-[500px] bg-purple-600/15 blur-[150px] pointer-events-none rounded-full animate-blob-2 z-0"></div>
+  <div class="fixed bottom-[-10%] left-[25%] w-[500px] h-[500px] bg-cyan-600/15 blur-[150px] pointer-events-none rounded-full animate-blob-3 z-0"></div>
+
+  <!-- Top Progress Bar -->
+  <div id="topProgressBar" class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 z-[9999] transition-all duration-300 w-0 pointer-events-none shadow-[0_0_12px_#6366f1]"></div>
+
+  <!-- Cyber Loader Overlay -->
+  <div id="cyberLoader" class="fixed inset-0 bg-[#07080c]/85 backdrop-blur-md z-[9998] flex flex-col items-center justify-center gap-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="relative w-16 h-16 flex items-center justify-center">
+      <div class="absolute inset-0 rounded-full border-2 border-indigo-500/20"></div>
+      <div class="absolute inset-0 rounded-full border-2 border-transparent border-t-indigo-500 border-r-cyan-400 animate-spin"></div>
+      <i class="fas fa-code text-indigo-400 text-sm animate-pulse"></i>
+    </div>
+    <div class="font-mono text-xs text-slate-400 tracking-widest uppercase flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>
+      <span id="loaderText">Compiling View...</span>
+    </div>
+  </div>
 
   <!-- Floating Island Header -->
   <header class="fixed top-5 left-0 w-full z-50 px-4">
-    <nav class="max-w-5xl mx-auto h-14 rounded-full glass-panel px-6 flex items-center justify-between shadow-2xl">
-      <a href="#home" class="text-sm font-extrabold tracking-wider text-white flex items-center gap-2">
-        <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse"></span>
+    <nav class="max-w-4xl mx-auto h-14 rounded-full glass-card px-6 flex items-center justify-between shadow-2xl">
+      <a href="#home" class="interactive-link text-sm font-extrabold tracking-wider text-white flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse shadow-[0_0_8px_#6366f1]"></span>
         RONJHAY<span class="text-indigo-400">.DEV</span>
       </a>
       
-      <div class="hidden md:flex items-center gap-7 text-xs font-semibold text-slate-400">
-        <a href="#home" class="hover:text-indigo-400 transition">Home</a>
-        <a href="#about" class="hover:text-indigo-400 transition">About</a>
-        <a href="#skills" class="hover:text-indigo-400 transition">Skills</a>
-        <a href="#projects" class="hover:text-indigo-400 transition">Projects</a>
-        <a href="#contact" class="hover:text-indigo-400 transition">Contact</a>
+      <div class="hidden sm:flex items-center gap-6 text-xs font-semibold text-slate-400">
+        <a href="#home" class="interactive-link hover:text-white transition">Home</a>
+        <a href="#about" class="interactive-link hover:text-white transition">About</a>
+        <a href="#skills" class="interactive-link hover:text-white transition">Stack</a>
+        <a href="#projects" class="interactive-link hover:text-white transition">Projects</a>
       </div>
 
-      <a href="#contact" class="px-4 py-1.5 rounded-full bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white text-xs font-semibold tracking-wide transition shadow-lg shadow-indigo-600/25">
-        Let's Talk <i class="fas fa-paper-plane text-[10px] ml-1"></i>
+      <a href="#contact" class="interactive-link px-4 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition shadow-lg shadow-indigo-600/30">
+        Let's Talk <i class="fas fa-arrow-right text-[10px] ml-1"></i>
       </a>
     </nav>
   </header>
 
-  <!-- Content Container -->
-  <div class="max-w-6xl mx-auto px-6 pt-32 pb-24 space-y-28">
+  <!-- Main Content Container -->
+  <main class="relative z-10 max-w-6xl mx-auto pt-32 px-6 space-y-24">
 
-    <!-- HOME / HERO SECTION -->
-    <section id="home" class="pt-8">
+    <!-- HERO BENTO -->
+    <section id="home" class="pt-6">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
-        <!-- Hero Pitch (7 Cols) -->
-        <div class="lg:col-span-7 glass-panel rounded-3xl p-8 sm:p-10 flex flex-col justify-between space-y-6">
+        <div class="lg:col-span-5 glass-card rounded-3xl p-8 flex flex-col justify-between space-y-6">
           <div class="space-y-4">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 text-[11px] font-semibold tracking-wide uppercase">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-              Available for Full-Stack & System Integration Work
+              Open for Web & Backend Projects
             </div>
 
             <h1 class="text-4xl sm:text-5xl font-extrabold text-white leading-tight tracking-tight">
-              Architecting <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-blue-400">Robust Backends</span> & Seamless Web Apps.
+              Full-Stack <br/>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-400">Web Developer.</span>
             </h1>
 
-            <p class="text-sm text-slate-400 leading-relaxed max-w-xl">
-              Specialized in relational database schemas, secure role-based session workflows, and custom administrative management platforms built with PHP, MySQL, and modern frontend utilities.
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              I architect reliable web systems with a primary focus on PHP backend architecture, relational MySQL schemas, and responsive interfaces.
             </p>
           </div>
 
-          <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-white/5">
-            <a href="#projects" class="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
-              Explore Projects <i class="fas fa-arrow-right text-[10px]"></i>
-            </a>
-            <a href="https://github.com/ronjhay7" target="_blank" class="px-6 py-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 text-slate-200 text-xs font-semibold transition flex items-center gap-2">
-              <i class="fab fa-github text-sm"></i> GitHub Profile
-            </a>
+          <div class="space-y-4 pt-2">
+            <div class="flex flex-wrap items-center gap-3">
+              <a href="#projects" class="interactive-link px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+                View Work <i class="fas fa-arrow-right text-[10px]"></i>
+              </a>
+              <a href="#contact" class="interactive-link px-5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-white/20 text-slate-200 text-xs font-semibold transition">
+                Contact Me
+              </a>
+            </div>
+
+            <div class="flex items-center gap-3 pt-2">
+              <a href="https://github.com/ronjhay7" target="_blank" class="w-9 h-9 rounded-xl glass-card flex items-center justify-center text-slate-400 hover:text-white hover:border-indigo-500/50 transition text-sm">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="mailto:ronjhay@example.com" class="w-9 h-9 rounded-xl glass-card flex items-center justify-center text-slate-400 hover:text-white hover:border-indigo-500/50 transition text-sm">
+                <i class="fas fa-envelope"></i>
+              </a>
+            </div>
           </div>
         </div>
 
-        <!-- Bento Highlights Card (5 Cols) -->
-        <div class="lg:col-span-5 grid grid-cols-2 gap-4">
-          <div class="glass-panel rounded-3xl p-6 flex flex-col justify-between">
-            <div class="w-10 h-10 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-lg">
-              <i class="fas fa-server"></i>
+        <!-- Skills Grid Card -->
+        <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-8 space-y-6" id="skills">
+          <div class="flex items-center justify-between border-b border-white/5 pb-4">
+            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-300">
+              <i class="fas fa-cubes text-indigo-400"></i> Core Tech Stack
             </div>
-            <div>
-              <div class="text-2xl font-extrabold text-white font-mono">100%</div>
-              <p class="text-xs text-slate-400 mt-1 font-medium">Relational DB Integrity & Session Security</p>
-            </div>
+            <span class="text-[11px] text-indigo-400 font-mono">Actual Working Skills</span>
           </div>
 
-          <div class="glass-panel rounded-3xl p-6 flex flex-col justify-between">
-            <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-lg">
-              <i class="fas fa-layer-group"></i>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-indigo-500/40 transition group">
+              <div class="flex items-center justify-between mb-3">
+                <i class="fab fa-php text-2xl text-indigo-400 group-hover:scale-110 transition"></i>
+                <span class="text-xs font-mono text-indigo-400 font-bold">95%</span>
+              </div>
+              <h4 class="text-sm font-bold text-white">PHP (PDO)</h4>
+              <p class="text-xs text-slate-400 mt-1">Prepared queries, sessions & backend routing</p>
             </div>
-            <div>
-              <div class="text-2xl font-extrabold text-white font-mono">Full-Stack</div>
-              <p class="text-xs text-slate-400 mt-1 font-medium">End-to-End Dynamic Architecture</p>
+
+            <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/40 transition group">
+              <div class="flex items-center justify-between mb-3">
+                <i class="fas fa-database text-xl text-blue-400 group-hover:scale-110 transition"></i>
+                <span class="text-xs font-mono text-blue-400 font-bold">92%</span>
+              </div>
+              <h4 class="text-sm font-bold text-white">MySQL Database</h4>
+              <p class="text-xs text-slate-400 mt-1">Relational tables, foreign keys & schema design</p>
             </div>
+
+            <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/40 transition group">
+              <div class="flex items-center justify-between mb-3">
+                <i class="fab fa-css3-alt text-2xl text-cyan-400 group-hover:scale-110 transition"></i>
+                <span class="text-xs font-mono text-cyan-400 font-bold">94%</span>
+              </div>
+              <h4 class="text-sm font-bold text-white">Tailwind CSS</h4>
+              <p class="text-xs text-slate-400 mt-1">Responsive layouts & dark glassmorphism</p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-amber-500/40 transition group">
+              <div class="flex items-center justify-between mb-3">
+                <i class="fab fa-js text-2xl text-amber-400 group-hover:scale-110 transition"></i>
+                <span class="text-xs font-mono text-amber-400 font-bold">88%</span>
+              </div>
+              <h4 class="text-sm font-bold text-white">JavaScript</h4>
+              <p class="text-xs text-slate-400 mt-1">DOM manipulation & dynamic client interactions</p>
+            </div>
+
           </div>
 
-          <div class="col-span-2 glass-panel rounded-3xl p-6 flex items-center justify-between">
-            <div class="space-y-1">
-              <span class="text-[11px] font-mono text-indigo-400 uppercase tracking-wider">Primary Stack</span>
-              <div class="text-sm font-bold text-white">PHP (PDO) • MySQL • Tailwind CSS</div>
+          <div class="pt-4 border-t border-white/5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1 h-6">
+                <span class="w-1 bg-indigo-500 rounded-full bar-1"></span>
+                <span class="w-1 bg-purple-500 rounded-full bar-2"></span>
+                <span class="w-1 bg-cyan-400 rounded-full bar-3"></span>
+                <span class="w-1 bg-indigo-400 rounded-full bar-4"></span>
+                <span class="w-1 bg-emerald-400 rounded-full bar-5"></span>
+              </div>
+              <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">System Status</span>
             </div>
-            <div class="text-slate-500 text-xl">
-              <i class="fas fa-code"></i>
-            </div>
+            <span class="text-xs font-mono text-emerald-400 font-bold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Active / Available
+            </span>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- ABOUT ME SECTION -->
+    <!-- ABOUT SECTION -->
     <section id="about" class="space-y-6">
       <div class="flex items-center gap-3">
         <span class="w-6 h-[2px] bg-indigo-500"></span>
@@ -148,128 +221,71 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div class="lg:col-span-8 glass-panel rounded-3xl p-8 space-y-4 leading-relaxed">
-          <h3 class="text-2xl font-bold text-white">Engineering practical solutions with structured code.</h3>
-          <p class="text-sm text-slate-400">
-            I am a Full-Stack Web Developer with a strong focus on backend system architecture, relational database management, and administrative dashboards. I build applications that bridge complex business logic with clean, intuitive user interfaces.
+        <div class="lg:col-span-8 glass-card rounded-3xl p-8 space-y-4">
+          <h3 class="text-2xl font-bold text-white leading-snug">Engineering real, functional web solutions with clean code.</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            I build full-stack web platforms that solve real operational workflows. My focus is writing secure database queries, establishing solid backend permissions, and presenting users with fast, responsive interfaces.
           </p>
-          <p class="text-sm text-slate-400">
-            Whether it is designing custom multi-role authentication workflows for tenants and landlords or integrating scalable Firebase backends, my goal is always focused on high performance, clean database queries, and bulletproof functionality.
-          </p>
+          <div class="pt-2 flex flex-wrap gap-2 text-xs font-mono">
+            <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">XAMPP Server</span>
+            <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">Git & GitHub</span>
+            <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">HTML5 / CSS3</span>
+            <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">Bootstrap / Tailwind</span>
+          </div>
         </div>
 
-        <div class="lg:col-span-4 glass-panel rounded-3xl p-8 flex flex-col justify-between space-y-4">
-          <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400">Core Principles</h4>
+        <div class="lg:col-span-4 glass-card rounded-3xl p-8 flex flex-col justify-between space-y-4">
+          <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400">What I Deliver</h4>
           <ul class="space-y-3 text-xs text-slate-300">
             <li class="flex items-center gap-2">
-              <i class="fas fa-check-circle text-emerald-400"></i> Strict Data Sanitization & Security
+              <i class="fas fa-shield-alt text-indigo-400"></i> Secure Session Authentication
             </li>
             <li class="flex items-center gap-2">
-              <i class="fas fa-check-circle text-emerald-400"></i> Responsive Mobile-First Interfaces
+              <i class="fas fa-database text-blue-400"></i> Clean MySQL Prepared Queries
             </li>
             <li class="flex items-center gap-2">
-              <i class="fas fa-check-circle text-emerald-400"></i> Normalized Relational Schemas
+              <i class="fas fa-mobile-alt text-cyan-400"></i> Responsive Mobile-First Design
             </li>
             <li class="flex items-center gap-2">
-              <i class="fas fa-check-circle text-emerald-400"></i> Scalable API Architecture
+              <i class="fas fa-sliders-h text-emerald-400"></i> Dynamic Data Filters & UI
             </li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- SKILLS MATRIX SECTION -->
-    <section id="skills" class="space-y-6">
-      <div class="flex items-center gap-3">
-        <span class="w-6 h-[2px] bg-indigo-500"></span>
-        <h2 class="text-xs font-mono uppercase tracking-widest text-indigo-400">Technical Arsenal</h2>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        
-        <!-- Skill 1 -->
-        <div class="glass-panel rounded-3xl p-6 space-y-4 group">
-          <div class="flex items-center justify-between">
-            <i class="fab fa-php text-3xl text-indigo-400 group-hover:scale-110 transition"></i>
-            <span class="text-xs font-mono text-indigo-400 font-semibold">95%</span>
-          </div>
-          <div>
-            <h4 class="text-sm font-bold text-white">PHP (PDO)</h4>
-            <p class="text-xs text-slate-400 mt-1">Prepared statements, authentication sessions, and REST endpoints.</p>
-          </div>
-        </div>
-
-        <!-- Skill 2 -->
-        <div class="glass-panel rounded-3xl p-6 space-y-4 group">
-          <div class="flex items-center justify-between">
-            <i class="fas fa-database text-2xl text-blue-400 group-hover:scale-110 transition"></i>
-            <span class="text-xs font-mono text-blue-400 font-semibold">92%</span>
-          </div>
-          <div>
-            <h4 class="text-sm font-bold text-white">MySQL</h4>
-            <p class="text-xs text-slate-400 mt-1">Normalized schema design, foreign keys, and query optimization.</p>
-          </div>
-        </div>
-
-        <!-- Skill 3 -->
-        <div class="glass-panel rounded-3xl p-6 space-y-4 group">
-          <div class="flex items-center justify-between">
-            <i class="fab fa-css3-alt text-3xl text-cyan-400 group-hover:scale-110 transition"></i>
-            <span class="text-xs font-mono text-cyan-400 font-semibold">94%</span>
-          </div>
-          <div>
-            <h4 class="text-sm font-bold text-white">Tailwind CSS</h4>
-            <p class="text-xs text-slate-400 mt-1">Bento grids, dark glassmorphism, and responsive layouts.</p>
-          </div>
-        </div>
-
-        <!-- Skill 4 -->
-        <div class="glass-panel rounded-3xl p-6 space-y-4 group">
-          <div class="flex items-center justify-between">
-            <i class="fab fa-js text-3xl text-amber-400 group-hover:scale-110 transition"></i>
-            <span class="text-xs font-mono text-amber-400 font-semibold">88%</span>
-          </div>
-          <div>
-            <h4 class="text-sm font-bold text-white">JavaScript</h4>
-            <p class="text-xs text-slate-400 mt-1">DOM manipulation, async fetch API, and client validations.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- FEATURED PROJECTS SECTION -->
+    <!-- PROJECTS SECTION -->
     <section id="projects" class="space-y-6">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
           <span class="w-6 h-[2px] bg-indigo-500"></span>
-          <h2 class="text-xs font-mono uppercase tracking-widest text-indigo-400">Featured Case Studies</h2>
+          <h2 class="text-xs font-mono uppercase tracking-widest text-indigo-400">Featured Work</h2>
         </div>
         <a href="https://github.com/ronjhay7" target="_blank" class="text-xs font-semibold text-slate-400 hover:text-white transition flex items-center gap-1">
-          GitHub Repositories <i class="fas fa-external-link-alt text-[10px]"></i>
+          GitHub Profile <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
         </a>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <!-- Project 1: Apartment Hunting -->
-        <div class="glass-panel rounded-3xl p-8 flex flex-col justify-between space-y-6 group">
+        <!-- Project 1: Apartment Hunting System -->
+        <div class="glass-card rounded-3xl p-8 flex flex-col justify-between space-y-6 group">
           <div class="space-y-4">
             <div class="flex items-center justify-between text-xs text-slate-500 font-mono">
-              <span class="text-indigo-400">Featured Platform</span>
-              <span>Full-Stack PHP / MySQL</span>
+              <span class="text-indigo-400">01 / Full-Stack Platform</span>
+              <span>2026</span>
             </div>
             
             <h3 class="text-2xl font-bold text-white group-hover:text-indigo-300 transition">
-              Apartment Hunting & Property Management System
+              Apartment Hunting & Property Management
             </h3>
             
             <p class="text-xs text-slate-400 leading-relaxed">
-              Full-featured property discovery portal engineered with dynamic search and proximity filters, 3-tier role authorization (Tenant, Landlord, Admin), document verification flows, and an administrative approval console.
+              Rental property discovery platform with dynamic location and price filters, 3-tier user access (Tenant, Landlord, Admin), verification submission flows, and management controls.
             </p>
 
             <div class="flex flex-wrap gap-2 pt-2 text-[11px] font-mono">
-              <span class="px-2.5 py-1 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">PHP PDO</span>
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">PHP (PDO)</span>
               <span class="px-2.5 py-1 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20">MySQL</span>
               <span class="px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Tailwind CSS</span>
             </div>
@@ -280,20 +296,20 @@
               View Repository <i class="fas fa-arrow-right text-[10px]"></i>
             </a>
             <span class="text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Production Ready
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live Codebase
             </span>
           </div>
         </div>
 
         <!-- Project 2: HealthConsult -->
-        <div class="glass-panel rounded-3xl p-8 flex flex-col justify-between space-y-6 group">
+        <div class="glass-card rounded-3xl p-8 flex flex-col justify-between space-y-6 group">
           <div class="space-y-4">
             <div class="flex items-center justify-between text-xs text-slate-500 font-mono">
-              <span class="text-teal-400">Healthcare Solution</span>
-              <span>Cloud & Realtime DB</span>
+              <span class="text-cyan-400">02 / Telehealth Platform</span>
+              <span>2026</span>
             </div>
             
-            <h3 class="text-2xl font-bold text-white group-hover:text-teal-300 transition">
+            <h3 class="text-2xl font-bold text-white group-hover:text-cyan-300 transition">
               HealthConsult Consultation Platform
             </h3>
             
@@ -302,15 +318,15 @@
             </p>
 
             <div class="flex flex-wrap gap-2 pt-2 text-[11px] font-mono">
-              <span class="px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20">Firebase RTDB</span>
-              <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">JavaScript</span>
+              <span class="px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">JavaScript</span>
               <span class="px-2.5 py-1 rounded-lg bg-purple-500/10 text-purple-400 border border-purple-500/20">Bootstrap</span>
+              <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Realtime DB</span>
             </div>
           </div>
 
           <div class="pt-4 border-t border-white/5 flex items-center justify-between">
-            <a href="https://github.com/ronjhay7" target="_blank" class="text-xs font-bold text-white hover:text-teal-400 transition flex items-center gap-2">
-              View Source Architecture <i class="fas fa-arrow-right text-[10px]"></i>
+            <a href="https://github.com/ronjhay7" target="_blank" class="text-xs font-bold text-white hover:text-cyan-400 transition flex items-center gap-2">
+              Explore Project <i class="fas fa-arrow-right text-[10px]"></i>
             </a>
             <span class="text-[11px] font-mono text-slate-500 flex items-center gap-1.5">
               Case Study
@@ -321,12 +337,12 @@
       </div>
     </section>
 
-    <!-- CONTACT / FOOTER SECTION -->
-    <section id="contact" class="glass-panel rounded-3xl p-8 sm:p-12 text-center space-y-6 border-indigo-500/20">
-      <div class="max-w-xl mx-auto space-y-4">
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Let's build something remarkable.</h2>
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="glass-card rounded-3xl p-8 sm:p-12 text-center space-y-6 border-indigo-500/20">
+      <div class="max-w-xl mx-auto space-y-3">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Let's build your next project.</h2>
         <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-          Looking for a full-stack developer to architect a dynamic database system, custom portal, or client management software? Send a message and let's get started.
+          Need a full-stack developer for custom PHP systems, database design, or web app development? Feel free to reach out.
         </p>
       </div>
 
@@ -339,13 +355,115 @@
         </a>
       </div>
 
-      <div class="pt-10 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-        <div>© 2026 Ronjhay. All rights reserved.</div>
-        <div class="font-mono text-[11px]">Engineered with Tailwind CSS & Glassmorphism</div>
+      <div class="pt-8 border-t border-white/5 text-xs text-slate-500">
+        © 2026 Ronjhay. All rights reserved.
       </div>
     </section>
 
-  </div>
+  </main>
+
+  <!-- ================= MOVING PARTICLES & INTERACTIVE SCRIPT ================= -->
+  <script>
+    // 1. Interactive Particle Network Background
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let particles = [];
+    let width, height;
+
+    function initCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      particles = [];
+      const particleCount = Math.floor(width / 24);
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.45,
+          vy: (Math.random() - 0.5) * 0.45,
+          radius: Math.random() * 1.5 + 0.8
+        });
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = 'rgba(99, 102, 241, 0.45)';
+      ctx.strokeStyle = 'rgba(99, 102, 241, 0.06)';
+
+      particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      });
+
+      requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener('resize', initCanvas);
+    initCanvas();
+    animateParticles();
+
+    // 2. Interactive Loading Transitions on Link Click
+    const progressBar = document.getElementById('topProgressBar');
+    const loader = document.getElementById('cyberLoader');
+    const loaderText = document.getElementById('loaderText');
+
+    function triggerLoading(targetText, callback) {
+      loaderText.textContent = targetText || "Loading Module...";
+      progressBar.style.width = '40%';
+      loader.classList.remove('opacity-0', 'pointer-events-none');
+
+      setTimeout(() => {
+        progressBar.style.width = '80%';
+      }, 150);
+
+      setTimeout(() => {
+        progressBar.style.width = '100%';
+        loader.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => {
+          progressBar.style.width = '0%';
+          if (callback) callback();
+        }, 200);
+      }, 350);
+    }
+
+    document.querySelectorAll('.interactive-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          const targetSection = document.querySelector(href);
+          const label = this.textContent.trim();
+          
+          triggerLoading("Navigating to " + label + "...", () => {
+            if (targetSection) {
+              targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          });
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
