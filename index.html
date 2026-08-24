@@ -31,6 +31,7 @@
       box-shadow: 0 16px 35px -10px rgba(99, 102, 241, 0.25);
     }
 
+    /* Ambient Glow Blobs */
     @keyframes floatBlob {
       0%, 100% { transform: translate(0px, 0px) scale(1); }
       33% { transform: translate(50px, -60px) scale(1.1); }
@@ -39,6 +40,7 @@
     .animate-blob-1 { animation: floatBlob 16s ease-in-out infinite; }
     .animate-blob-2 { animation: floatBlob 20s ease-in-out infinite reverse; }
 
+    /* Soundwave */
     @keyframes soundwave {
       0%, 100% { height: 6px; }
       50% { height: 22px; }
@@ -64,11 +66,36 @@
       transform: translateY(-100%) !important;
       transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1) !important;
     }
+
+    /* Hanging Lanyard Rope & Physics Badge */
+    .badge-perspective {
+      perspective: 1000px;
+    }
+    #idBadgeCard {
+      transform-style: preserve-3d;
+      transform-origin: top center;
+      transition: transform 0.12s ease-out;
+      cursor: grab;
+      user-select: none;
+    }
+    #idBadgeCard:active {
+      cursor: grabbing;
+    }
+    .lanyard-strap {
+      background: repeating-linear-gradient(
+        0deg,
+        #4f46e5,
+        #4f46e5 8px,
+        #312e81 8px,
+        #312e81 16px
+      );
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+    }
   </style>
 </head>
 <body class="text-slate-300 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
 
-  <!-- ================= PRELOADER (6s) ================= -->
+  <!-- ================= PRELOADER ================= -->
   <div id="preloader" class="fixed inset-0 bg-[#06070a] z-[99999] flex flex-col justify-between items-center p-8 sm:p-12 transition-all duration-700">
     <div class="w-full max-w-4xl flex items-center justify-between text-xs font-mono text-slate-500 uppercase tracking-widest border-b border-white/5 pb-4">
       <div class="flex items-center gap-2">
@@ -146,11 +173,11 @@
   <!-- Main Container -->
   <main class="relative z-10 max-w-6xl mx-auto px-6 space-y-24 pb-20">
 
-    <!-- HERO SECTION: TEXT (LEFT) + PROFILE PHOTO (RIGHT) -->
+    <!-- HERO SECTION -->
     <section id="home" class="scroll-mt-32 pt-28">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         
-        <!-- Left: Hero Pitch -->
+        <!-- Left Hero Pitch -->
         <div class="lg:col-span-7 glass-card rounded-3xl p-8 sm:p-10 flex flex-col justify-between space-y-6">
           <div class="space-y-4">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 text-[11px] font-semibold tracking-wide uppercase">
@@ -189,26 +216,64 @@
           </div>
         </div>
 
-        <!-- Right: Profile Photo Showcase Card -->
-        <div class="lg:col-span-5 glass-card rounded-3xl p-6 flex flex-col items-center justify-center relative overflow-hidden group">
-          <!-- Ambient Card Glow behind photo -->
-          <div class="absolute -top-10 -right-10 w-40 h-40 bg-indigo-500/20 blur-3xl rounded-full"></div>
+        <!-- Right: Interactive Hanging ID Lanyard Badge -->
+        <div class="lg:col-span-5 flex flex-col items-center justify-center badge-perspective relative py-6">
           
-          <div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-2xl overflow-hidden border-2 border-white/10 group-hover:border-indigo-500/50 transition shadow-2xl">
-            <!-- Profile Photo (Make sure profile.jpg is uploaded in repo root) -->
-            <img src="profile.jpg" alt="Ronjhay" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80'" />
+          <!-- Lanyard Clip & Top Straps -->
+          <div class="flex flex-col items-center z-20">
+            <!-- Straps coming from top -->
+            <div class="w-7 h-20 lanyard-strap rounded-t-sm shadow-md"></div>
+            <!-- Metallic Swivel Hook -->
+            <div class="w-6 h-3 bg-gradient-to-r from-slate-400 via-slate-200 to-slate-400 rounded-sm shadow"></div>
+            <div class="w-2.5 h-3.5 bg-slate-400 rounded-full border border-slate-600 -mt-1"></div>
+            <!-- Badge Top Hole -->
+            <div class="w-8 h-3.5 bg-slate-900 border border-white/20 rounded-md -mt-1.5 flex items-center justify-center">
+              <div class="w-4 h-1.5 bg-black rounded-full"></div>
+            </div>
           </div>
 
-          <div class="mt-4 text-center space-y-1">
-            <h3 class="text-base font-bold text-white">Ronjhay</h3>
-            <p class="text-xs font-mono text-indigo-400">Backend & Web Integrator</p>
+          <!-- The Swingable ID Card -->
+          <div id="idBadgeCard" class="w-64 sm:w-72 glass-card rounded-3xl p-5 border-white/15 shadow-2xl relative flex flex-col items-center -mt-1 bg-gradient-to-b from-[#161926]/90 to-[#0c0e17]/95">
+            
+            <!-- Holographic Badge Bar -->
+            <div class="w-full flex items-center justify-between text-[9px] font-mono text-indigo-400 uppercase tracking-widest pb-3 border-b border-white/10">
+              <span>MEMBER_PASS</span>
+              <span class="text-emerald-400">● VERIFIED</span>
+            </div>
+
+            <!-- Profile Photo Box -->
+            <div class="relative w-40 h-44 sm:w-44 sm:h-48 rounded-2xl overflow-hidden border border-white/20 shadow-inner mt-4 group">
+              <img src="profile.jpg" alt="Ronjhay" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80'" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+              <div class="absolute bottom-2 left-2 right-2 text-center">
+                <span class="text-[10px] font-mono bg-indigo-600/80 backdrop-blur-md px-2 py-0.5 rounded text-white uppercase font-bold">Web Developer</span>
+              </div>
+            </div>
+
+            <!-- Identity Details -->
+            <div class="mt-4 text-center space-y-0.5">
+              <h3 class="text-lg font-extrabold text-white">Ronjhay</h3>
+              <p class="text-[11px] font-mono text-slate-400">Full-Stack & Backend Dev</p>
+            </div>
+
+            <!-- Card Chip & Barcode -->
+            <div class="w-full mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-slate-500">
+              <i class="fas fa-microchip text-yellow-500/80 text-xl"></i>
+              <div class="font-mono text-[9px] text-slate-400 tracking-tighter">ID: DEV-2026-904</div>
+              <i class="fas fa-barcode text-xl text-slate-400"></i>
+            </div>
+
+            <div class="text-[9px] font-mono text-slate-500 mt-2">
+              <i class="fas fa-hand-pointer text-indigo-400 animate-pulse"></i> Drag or hover to swing
+            </div>
           </div>
+
         </div>
 
       </div>
     </section>
 
-    <!-- CORE TECH STACK SECTION (FULL-WIDTH ROW BELOW HERO) -->
+    <!-- CORE TECH STACK SECTION -->
     <section id="skills" class="scroll-mt-28 space-y-4">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
@@ -222,7 +287,6 @@
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
-        <!-- Skill 1: PHP -->
         <div class="glass-card rounded-3xl p-6 space-y-3 group">
           <div class="flex items-center justify-between">
             <i class="fab fa-php text-3xl text-indigo-400 group-hover:scale-110 transition"></i>
@@ -232,7 +296,6 @@
           <p class="text-xs text-slate-400">Backend routing, sessions & form data handling</p>
         </div>
 
-        <!-- Skill 2: MySQL -->
         <div class="glass-card rounded-3xl p-6 space-y-3 group">
           <div class="flex items-center justify-between">
             <i class="fas fa-database text-2xl text-blue-400 group-hover:scale-110 transition"></i>
@@ -242,7 +305,6 @@
           <p class="text-xs text-slate-400">Relational schemas, foreign keys & queries</p>
         </div>
 
-        <!-- Skill 3: Firebase -->
         <div class="glass-card rounded-3xl p-6 space-y-3 group">
           <div class="flex items-center justify-between">
             <i class="fas fa-fire text-2xl text-amber-500 group-hover:scale-110 transition"></i>
@@ -252,7 +314,6 @@
           <p class="text-xs text-slate-400">Realtime DB, Authentication & Storage</p>
         </div>
 
-        <!-- Skill 4: Tailwind CSS -->
         <div class="glass-card rounded-3xl p-6 space-y-3 group">
           <div class="flex items-center justify-between">
             <i class="fab fa-css3-alt text-3xl text-cyan-400 group-hover:scale-110 transition"></i>
@@ -416,8 +477,9 @@
 
   </main>
 
-  <!-- ================= PRELOADER ENGINE ================= -->
+  <!-- ================= SCRIPTS ================= -->
   <script>
+    // 1. PRELOADER LOGIC
     (function() {
       const preloader = document.getElementById('preloader');
       const loadPercent = document.getElementById('loadPercent');
@@ -470,6 +532,67 @@
 
       requestAnimationFrame(updateLoader);
       setTimeout(hideScreen, 6500);
+    })();
+
+    // 2. INTERACTIVE HANGING ID BADGE PHYSICS
+    (function() {
+      const card = document.getElementById('idBadgeCard');
+      if (!card) return;
+
+      let isDragging = false;
+      let startX, startY;
+      let currentRotateX = 0, currentRotateY = 0, currentRotateZ = 0;
+
+      function applyTransform(x, y, z) {
+        card.style.transform = `rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
+      }
+
+      // Mouse Hover Tilt
+      card.parentElement.addEventListener('mousemove', (e) => {
+        if (isDragging) return;
+        const rect = card.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        const deltaX = (e.clientX - centerX) / 12;
+        const deltaY = (e.clientY - centerY) / 16;
+
+        currentRotateY = deltaX;
+        currentRotateX = -deltaY;
+        currentRotateZ = deltaX * 0.4;
+
+        applyTransform(currentRotateX, currentRotateY, currentRotateZ);
+      });
+
+      card.parentElement.addEventListener('mouseleave', () => {
+        if (isDragging) return;
+        // Smooth return to resting hanging position
+        card.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        applyTransform(0, 0, 0);
+        setTimeout(() => { card.style.transition = 'transform 0.12s ease-out'; }, 600);
+      });
+
+      // Mouse Drag Interaction
+      card.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const dragX = (e.clientX - startX) / 6;
+        const dragY = (e.clientY - startY) / 8;
+        applyTransform(-dragY, dragX, dragX * 0.6);
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        card.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        applyTransform(0, 0, 0);
+        setTimeout(() => { card.style.transition = 'transform 0.12s ease-out'; }, 800);
+      });
     })();
   </script>
 
