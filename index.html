@@ -14,22 +14,13 @@
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #07080c;
+      background-color: #06070a;
     }
     .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* Moving Glowing Blob Animations */
-    @keyframes floatBlob {
-      0%, 100% { transform: translate(0px, 0px) scale(1); }
-      33% { transform: translate(60px, -80px) scale(1.15); }
-      66% { transform: translate(-50px, 50px) scale(0.9); }
-    }
-    .animate-blob-1 { animation: floatBlob 18s ease-in-out infinite; }
-    .animate-blob-2 { animation: floatBlob 22s ease-in-out infinite reverse; }
-    .animate-blob-3 { animation: floatBlob 20s ease-in-out infinite 2s; }
-
+    /* Glassmorphism Panels */
     .glass-card {
-      background: rgba(14, 16, 26, 0.75);
+      background: rgba(13, 15, 24, 0.75);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -41,6 +32,16 @@
       box-shadow: 0 16px 35px -10px rgba(99, 102, 241, 0.25);
     }
 
+    /* Ambient Glow Blobs */
+    @keyframes floatBlob {
+      0%, 100% { transform: translate(0px, 0px) scale(1); }
+      33% { transform: translate(50px, -60px) scale(1.1); }
+      66% { transform: translate(-40px, 40px) scale(0.9); }
+    }
+    .animate-blob-1 { animation: floatBlob 16s ease-in-out infinite; }
+    .animate-blob-2 { animation: floatBlob 20s ease-in-out infinite reverse; }
+
+    /* Audio wave animation */
     @keyframes soundwave {
       0%, 100% { height: 6px; }
       50% { height: 22px; }
@@ -54,31 +55,46 @@
 </head>
 <body class="text-slate-300 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
 
-  <!-- ================= MOVING CANVAS BACKGROUND ================= -->
-  <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
-
-  <!-- ================= ANIMATED GLOWING GRADIENT BLOBS ================= -->
-  <div class="fixed top-[-10%] left-[-5%] w-[550px] h-[550px] bg-indigo-600/20 blur-[150px] pointer-events-none rounded-full animate-blob-1 z-0"></div>
-  <div class="fixed top-[45%] right-[-5%] w-[500px] h-[500px] bg-purple-600/15 blur-[150px] pointer-events-none rounded-full animate-blob-2 z-0"></div>
-  <div class="fixed bottom-[-10%] left-[25%] w-[500px] h-[500px] bg-cyan-600/15 blur-[150px] pointer-events-none rounded-full animate-blob-3 z-0"></div>
-
-  <!-- Top Progress Bar -->
-  <div id="topProgressBar" class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 z-[9999] transition-all duration-300 w-0 pointer-events-none shadow-[0_0_12px_#6366f1]"></div>
-
-  <!-- Cyber Loader Overlay -->
-  <div id="cyberLoader" class="fixed inset-0 bg-[#07080c]/85 backdrop-blur-md z-[9998] flex flex-col items-center justify-center gap-4 opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="relative w-16 h-16 flex items-center justify-center">
-      <div class="absolute inset-0 rounded-full border-2 border-indigo-500/20"></div>
-      <div class="absolute inset-0 rounded-full border-2 border-transparent border-t-indigo-500 border-r-cyan-400 animate-spin"></div>
-      <i class="fas fa-code text-indigo-400 text-sm animate-pulse"></i>
+  <!-- ================= CINEMATIC INITIAL PRELOADER ================= -->
+  <div id="preloader" class="fixed inset-0 bg-[#06070a] z-[99999] flex flex-col justify-between p-8 sm:p-14 transition-transform duration-700 ease-[cubic-bezier(0.85,0,0.15,1)]">
+    
+    <!-- Top Row: Location & Status -->
+    <div class="flex items-center justify-between text-xs font-mono text-slate-500 uppercase tracking-widest">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>
+        <span>Portfolio 2026</span>
+      </div>
+      <div>Full-Stack Web Dev</div>
     </div>
-    <div class="font-mono text-xs text-slate-400 tracking-widest uppercase flex items-center gap-2">
-      <span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>
-      <span id="loaderText">Compiling View...</span>
+
+    <!-- Center: Brand Logo Reveal -->
+    <div class="text-center space-y-3">
+      <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-white flex items-center justify-center gap-1">
+        RONJHAY<span class="text-indigo-500">.DEV</span>
+      </h1>
+      <p class="text-[11px] font-mono text-slate-500 tracking-widest uppercase">
+        Loading Experience
+      </p>
+    </div>
+
+    <!-- Bottom Row: Realtime Progress Counter & Bar -->
+    <div class="space-y-3">
+      <div class="flex justify-between items-end font-mono text-xs text-slate-400">
+        <span class="text-indigo-400">System Initializing...</span>
+        <span id="loadPercent" class="text-2xl sm:text-3xl font-bold text-white">0%</span>
+      </div>
+      <div class="w-full h-[2px] bg-white/10 rounded-full overflow-hidden">
+        <div id="preloaderBar" class="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 w-0 transition-all duration-75 ease-out shadow-[0_0_12px_#6366f1]"></div>
+      </div>
     </div>
   </div>
 
-  <!-- Floating Island Header -->
+  <!-- Background Canvas & Glow -->
+  <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+  <div class="fixed top-[-10%] left-[-5%] w-[550px] h-[550px] bg-indigo-600/15 blur-[150px] pointer-events-none rounded-full animate-blob-1 z-0"></div>
+  <div class="fixed top-[45%] right-[-5%] w-[500px] h-[500px] bg-purple-600/10 blur-[150px] pointer-events-none rounded-full animate-blob-2 z-0"></div>
+
+  <!-- Navigation Bar -->
   <header class="fixed top-5 left-0 w-full z-50 px-4">
     <nav class="max-w-4xl mx-auto h-14 rounded-full glass-card px-6 flex items-center justify-between shadow-2xl">
       <a href="#home" class="interactive-link text-sm font-extrabold tracking-wider text-white flex items-center gap-2">
@@ -99,7 +115,7 @@
     </nav>
   </header>
 
-  <!-- Main Content Container -->
+  <!-- Main Container -->
   <main class="relative z-10 max-w-6xl mx-auto pt-32 px-6 space-y-24">
 
     <!-- HERO BENTO -->
@@ -230,7 +246,7 @@
             <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">XAMPP Server</span>
             <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">Git & GitHub</span>
             <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">HTML5 / CSS3</span>
-            <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">Bootstrap / Tailwind</span>
+            <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">Tailwind CSS</span>
           </div>
         </div>
 
@@ -362,12 +378,38 @@
 
   </main>
 
-  <!-- ================= MOVING PARTICLES & INTERACTIVE SCRIPT ================= -->
+  <!-- ================= SCRIPTS: PRELOADER & PARTICLES ================= -->
   <script>
-    // 1. Interactive Particle Network Background
+    // 1. Initial Aesthetic Preloader Sequence (0 to 100%)
+    const preloader = document.getElementById('preloader');
+    const loadPercent = document.getElementById('loadPercent');
+    const preloaderBar = document.getElementById('preloaderBar');
+
+    let currentProgress = 0;
+    const interval = setInterval(() => {
+      // Random stepped increment for realistic compilation effect
+      currentProgress += Math.floor(Math.random() * 8) + 3;
+      
+      if (currentProgress >= 100) {
+        currentProgress = 100;
+        clearInterval(interval);
+        
+        loadPercent.textContent = '100%';
+        preloaderBar.style.width = '100%';
+
+        // Slide up curtain reveal
+        setTimeout(() => {
+          preloader.style.transform = 'translateY(-100%)';
+        }, 300);
+      } else {
+        loadPercent.textContent = currentProgress + '%';
+        preloaderBar.style.width = currentProgress + '%';
+      }
+    }, 40);
+
+    // 2. Interactive Background Particles
     const canvas = document.getElementById('particleCanvas');
     const ctx = canvas.getContext('2d');
-
     let particles = [];
     let width, height;
 
@@ -375,23 +417,22 @@
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
       particles = [];
-      const particleCount = Math.floor(width / 24);
-
-      for (let i = 0; i < particleCount; i++) {
+      const count = Math.floor(width / 24);
+      for (let i = 0; i < count; i++) {
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.45,
-          vy: (Math.random() - 0.5) * 0.45,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
           radius: Math.random() * 1.5 + 0.8
         });
       }
     }
 
-    function animateParticles() {
+    function animate() {
       ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = 'rgba(99, 102, 241, 0.45)';
-      ctx.strokeStyle = 'rgba(99, 102, 241, 0.06)';
+      ctx.fillStyle = 'rgba(99, 102, 241, 0.4)';
+      ctx.strokeStyle = 'rgba(99, 102, 241, 0.05)';
 
       particles.forEach((p, i) => {
         p.x += p.vx;
@@ -407,7 +448,7 @@
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-          if (dist < 120) {
+          if (dist < 110) {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
@@ -415,54 +456,12 @@
           }
         }
       });
-
-      requestAnimationFrame(animateParticles);
+      requestAnimationFrame(animate);
     }
 
     window.addEventListener('resize', initCanvas);
     initCanvas();
-    animateParticles();
-
-    // 2. Interactive Loading Transitions on Link Click
-    const progressBar = document.getElementById('topProgressBar');
-    const loader = document.getElementById('cyberLoader');
-    const loaderText = document.getElementById('loaderText');
-
-    function triggerLoading(targetText, callback) {
-      loaderText.textContent = targetText || "Loading Module...";
-      progressBar.style.width = '40%';
-      loader.classList.remove('opacity-0', 'pointer-events-none');
-
-      setTimeout(() => {
-        progressBar.style.width = '80%';
-      }, 150);
-
-      setTimeout(() => {
-        progressBar.style.width = '100%';
-        loader.classList.add('opacity-0', 'pointer-events-none');
-        setTimeout(() => {
-          progressBar.style.width = '0%';
-          if (callback) callback();
-        }, 200);
-      }, 350);
-    }
-
-    document.querySelectorAll('.interactive-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href && href.startsWith('#')) {
-          e.preventDefault();
-          const targetSection = document.querySelector(href);
-          const label = this.textContent.trim();
-          
-          triggerLoading("Navigating to " + label + "...", () => {
-            if (targetSection) {
-              targetSection.scrollIntoView({ behavior: 'smooth' });
-            }
-          });
-        }
-      });
-    });
+    animate();
   </script>
 
 </body>
