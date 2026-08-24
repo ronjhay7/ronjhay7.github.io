@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" style="scroll-padding-top: 6rem;">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,7 +31,6 @@
       box-shadow: 0 16px 35px -10px rgba(99, 102, 241, 0.25);
     }
 
-    /* Ambient Glow Blobs */
     @keyframes floatBlob {
       0%, 100% { transform: translate(0px, 0px) scale(1); }
       33% { transform: translate(50px, -60px) scale(1.1); }
@@ -40,7 +39,6 @@
     .animate-blob-1 { animation: floatBlob 16s ease-in-out infinite; }
     .animate-blob-2 { animation: floatBlob 20s ease-in-out infinite reverse; }
 
-    /* Audio wave animation */
     @keyframes soundwave {
       0%, 100% { height: 6px; }
       50% { height: 22px; }
@@ -51,7 +49,6 @@
     .bar-4 { animation: soundwave 0.9s ease-in-out infinite 0.1s; }
     .bar-5 { animation: soundwave 1.2s ease-in-out infinite 0.3s; }
 
-    /* Preloader Circular Spinner Animation */
     @keyframes spinBorder {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
@@ -60,7 +57,6 @@
       animation: spinBorder 2s linear infinite;
     }
 
-    /* Preloader Exit */
     .preloader-hidden {
       opacity: 0 !important;
       visibility: hidden !important;
@@ -72,6 +68,7 @@
 </head>
 <body class="text-slate-300 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
 
+  <!-- ================= PRELOADER (6 SECONDS) ================= -->
   <div id="preloader" class="fixed inset-0 bg-[#06070a] z-[99999] flex flex-col justify-between items-center p-8 sm:p-12 transition-all duration-700">
     
     <div class="w-full max-w-4xl flex items-center justify-between text-xs font-mono text-slate-500 uppercase tracking-widest border-b border-white/5 pb-4">
@@ -86,7 +83,6 @@
     </div>
 
     <div class="flex flex-col items-center justify-center space-y-6 my-auto">
-      
       <div class="relative w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center">
         <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-indigo-500 border-r-purple-500 border-b-cyan-400 loader-ring shadow-[0_0_25px_rgba(99,102,241,0.4)]"></div>
         <div class="absolute inset-2 rounded-full border border-dashed border-white/10"></div>
@@ -99,10 +95,10 @@
 
       <div class="text-center space-y-1">
         <h2 id="toolName" class="text-xl sm:text-2xl font-extrabold tracking-wider text-white">
-          PHP (PDO) CORE
+          PHP BACKEND
         </h2>
         <p id="toolDetail" class="text-[11px] font-mono text-indigo-400 tracking-widest uppercase">
-          [1/6] Initializing secure server runtime...
+          [1/6] Initializing server-side runtime...
         </p>
       </div>
 
@@ -113,9 +109,8 @@
           <span class="w-2 h-2 rounded-full bg-emerald-500/60"></span>
           <span class="ml-1 text-slate-400">terminal@ronjhay:~</span>
         </div>
-        <p class="text-slate-400 truncate"><span class="text-emerald-400">root@sys:</span> <span id="terminalLog">Mounting server dependencies...</span></p>
+        <p class="text-slate-400 truncate"><span class="text-emerald-400">root@sys:</span> <span id="terminalLog">Mounting server environment...</span></p>
       </div>
-
     </div>
 
     <div class="w-full max-w-4xl flex items-center justify-between text-xs font-mono text-slate-500 border-t border-white/5 pt-4">
@@ -124,9 +119,11 @@
     </div>
   </div>
 
+  <!-- Ambient Glow -->
   <div class="fixed top-[-10%] left-[-5%] w-[550px] h-[550px] bg-indigo-600/15 blur-[150px] pointer-events-none rounded-full animate-blob-1 z-0"></div>
   <div class="fixed top-[45%] right-[-5%] w-[500px] h-[500px] bg-purple-600/10 blur-[150px] pointer-events-none rounded-full animate-blob-2 z-0"></div>
 
+  <!-- Fixed Navigation Bar -->
   <header class="fixed top-5 left-0 w-full z-50 px-4">
     <nav class="max-w-4xl mx-auto h-14 rounded-full glass-card px-6 flex items-center justify-between shadow-2xl">
       <a href="#home" class="text-sm font-extrabold tracking-wider text-white flex items-center gap-2">
@@ -147,9 +144,11 @@
     </nav>
   </header>
 
-  <main class="relative z-10 max-w-6xl mx-auto pt-32 px-6 space-y-24">
+  <!-- Main Content Container -->
+  <main class="relative z-10 max-w-6xl mx-auto px-6 space-y-28 pb-20">
 
-    <section id="home" class="pt-6">
+    <!-- HERO / HOME SECTION -->
+    <section id="home" class="scroll-mt-32 pt-28">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
         <div class="lg:col-span-5 glass-card rounded-3xl p-8 flex flex-col justify-between space-y-6">
@@ -165,7 +164,7 @@
             </h1>
 
             <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              I architect reliable web systems with a primary focus on PHP backend architecture, relational MySQL schemas, Firebase cloud sync, and responsive Tailwind UI.
+              I architect reliable web systems with a primary focus on PHP backend development, relational MySQL schemas, Firebase cloud sync, and responsive Tailwind UI.
             </p>
           </div>
 
@@ -190,6 +189,7 @@
           </div>
         </div>
 
+        <!-- Skills Grid Card -->
         <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-8 space-y-6" id="skills">
           <div class="flex items-center justify-between border-b border-white/5 pb-4">
             <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-300">
@@ -205,8 +205,8 @@
                 <i class="fab fa-php text-2xl text-indigo-400 group-hover:scale-110 transition"></i>
                 <span class="text-xs font-mono text-indigo-400 font-bold">95%</span>
               </div>
-              <h4 class="text-sm font-bold text-white">PHP (PDO)</h4>
-              <p class="text-xs text-slate-400 mt-1">Prepared queries, sessions & backend routing</p>
+              <h4 class="text-sm font-bold text-white">PHP</h4>
+              <p class="text-xs text-slate-400 mt-1">Backend logic, user sessions & routing</p>
             </div>
 
             <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/40 transition group">
@@ -233,7 +233,7 @@
                 <span class="text-xs font-mono text-cyan-400 font-bold">94%</span>
               </div>
               <h4 class="text-sm font-bold text-white">Tailwind CSS</h4>
-              <p class="text-xs text-slate-400 mt-1">Responsive layouts & dark glassmorphism</p>
+              <p class="text-xs text-slate-400 mt-1">Responsive layouts & dark UI design</p>
             </div>
 
           </div>
@@ -258,7 +258,8 @@
       </div>
     </section>
 
-    <section id="about" class="space-y-6">
+    <!-- ABOUT SECTION -->
+    <section id="about" class="scroll-mt-28 space-y-6">
       <div class="flex items-center gap-3">
         <span class="w-6 h-[2px] bg-indigo-500"></span>
         <h2 class="text-xs font-mono uppercase tracking-widest text-indigo-400">About Me</h2>
@@ -268,10 +269,10 @@
         <div class="lg:col-span-8 glass-card rounded-3xl p-8 space-y-4">
           <h3 class="text-2xl font-bold text-white leading-snug">Engineering real, functional web solutions with clean code.</h3>
           <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-            I build full-stack web platforms that solve real operational workflows. My focus is writing secure database queries, establishing solid backend permissions with PHP PDO and Firebase, and presenting users with fast, responsive Tailwind interfaces.
+            I build full-stack web platforms that solve real operational workflows. My focus is writing secure database queries, establishing solid backend permissions with PHP and Firebase, and presenting users with fast, responsive Tailwind interfaces.
           </p>
           <div class="pt-2 flex flex-wrap gap-2 text-xs font-mono">
-            <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">PHP (PDO)</span>
+            <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">PHP</span>
             <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">Firebase Realtime DB</span>
             <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">MySQL</span>
             <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">JavaScript</span>
@@ -287,7 +288,7 @@
               <i class="fas fa-shield-alt text-indigo-400"></i> Secure Role Authentication
             </li>
             <li class="flex items-center gap-2">
-              <i class="fas fa-database text-blue-400"></i> Relational MySQL Prepared Queries
+              <i class="fas fa-database text-blue-400"></i> Relational MySQL Database Design
             </li>
             <li class="flex items-center gap-2">
               <i class="fas fa-fire text-amber-500"></i> Firebase Realtime Synchronization
@@ -300,7 +301,8 @@
       </div>
     </section>
 
-    <section id="projects" class="space-y-6">
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="scroll-mt-28 space-y-6">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
           <span class="w-6 h-[2px] bg-indigo-500"></span>
@@ -313,6 +315,7 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
+        <!-- Project 1: Apartment Hunting System -->
         <div class="glass-card rounded-3xl p-8 flex flex-col justify-between space-y-6 group">
           <div class="space-y-4">
             <div class="flex items-center justify-between text-xs text-slate-500 font-mono">
@@ -329,7 +332,7 @@
             </p>
 
             <div class="flex flex-wrap gap-2 pt-2 text-[11px] font-mono">
-              <span class="px-2.5 py-1 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">PHP (PDO)</span>
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">PHP</span>
               <span class="px-2.5 py-1 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20">MySQL</span>
               <span class="px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Tailwind CSS</span>
             </div>
@@ -345,6 +348,7 @@
           </div>
         </div>
 
+        <!-- Project 2: HealthConsult -->
         <div class="glass-card rounded-3xl p-8 flex flex-col justify-between space-y-6 group">
           <div class="space-y-4">
             <div class="flex items-center justify-between text-xs text-slate-500 font-mono">
@@ -380,7 +384,8 @@
       </div>
     </section>
 
-    <section id="contact" class="glass-card rounded-3xl p-8 sm:p-12 text-center space-y-6 border-indigo-500/20">
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="scroll-mt-28 glass-card rounded-3xl p-8 sm:p-12 text-center space-y-6 border-indigo-500/20">
       <div class="max-w-xl mx-auto space-y-3">
         <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Let's build your next project.</h2>
         <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
@@ -404,6 +409,7 @@
 
   </main>
 
+  <!-- ================= PRELOADER ENGINE ================= -->
   <script>
     (function() {
       const preloader = document.getElementById('preloader');
@@ -414,10 +420,10 @@
       const terminalLog = document.getElementById('terminalLog');
 
       const tools = [
-        { icon: 'fab fa-php text-indigo-400', name: 'PHP (PDO) ENGINE', detail: '[1/6] Server-side runtime...', log: 'Mounting PDO driver & session storage...' },
-        { icon: 'fas fa-database text-blue-400', name: 'MYSQL RELATIONAL DB', detail: '[2/6] Relational schemas...', log: 'Executing query validation checks...' },
+        { icon: 'fab fa-php text-indigo-400', name: 'PHP BACKEND', detail: '[1/6] Server-side runtime...', log: 'Mounting PHP session & routing storage...' },
+        { icon: 'fas fa-database text-blue-400', name: 'MYSQL DATABASE', detail: '[2/6] Relational schemas...', log: 'Executing query validation checks...' },
         { icon: 'fas fa-fire text-amber-500', name: 'GOOGLE FIREBASE', detail: '[3/6] Cloud realtime sync...', log: 'Connecting Firebase Realtime DB listeners...' },
-        { icon: 'fab fa-css3-alt text-cyan-400', name: 'TAILWIND CSS 3.4', detail: '[4/6] Bento UI compile...', log: 'Rendering glassmorphism utility classes...' },
+        { icon: 'fab fa-css3-alt text-cyan-400', name: 'TAILWIND CSS', detail: '[4/6] Bento UI compile...', log: 'Rendering glassmorphism utility classes...' },
         { icon: 'fab fa-js text-yellow-400', name: 'JAVASCRIPT (ES6+)', detail: '[5/6] Interactive DOM...', log: 'Injecting async event handlers...' },
         { icon: 'fab fa-github text-slate-200', name: 'GIT & REPOSITORIES', detail: '[6/6] Build deployment...', log: 'Finalizing production release -> SUCCESS' }
       ];
@@ -455,10 +461,7 @@
         }
       }
 
-      // Start loading
       requestAnimationFrame(updateLoader);
-
-      // Ultimate Fail-safe: Forces exit after 6.5s no matter what
       setTimeout(hideScreen, 6500);
     })();
   </script>
