@@ -19,59 +19,51 @@
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
+      transform: translateZ(0); /* GPU acceleration */
     }
     .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* Dark Mode Cards */
+    /* Ultra-Optimized GPU Accelerated Cards (No Lag) */
     .dark .glass-card {
-      background: rgba(13, 15, 24, 0.78);
+      background: #0f121d;
       border: 1px solid rgba(255, 255, 255, 0.08);
       color: #cbd5e1;
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
     }
     .dark .glass-card:hover {
       border-color: rgba(99, 102, 241, 0.45);
-      box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.2);
+      box-shadow: 0 14px 28px -5px rgba(99, 102, 241, 0.18);
     }
 
     /* Light Mode Cards */
     .glass-card {
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(226, 232, 240, 0.9);
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
       color: #334155;
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 15px -2px rgba(0, 0, 0, 0.04);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      will-change: transform;
     }
     .glass-card:hover {
       border-color: rgba(99, 102, 241, 0.4);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 35px -10px rgba(99, 102, 241, 0.12);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.1);
     }
-
-    /* Ambient Glowing Blobs */
-    @keyframes floatBlob {
-      0%, 100% { transform: translate(0px, 0px) scale(1); }
-      33% { transform: translate(50px, -60px) scale(1.1); }
-      66% { transform: translate(-40px, 40px) scale(0.9); }
-    }
-    .animate-blob-1 { animation: floatBlob 16s ease-in-out infinite; }
-    .animate-blob-2 { animation: floatBlob 20s ease-in-out infinite reverse; }
 
     /* Concentric Radar Rings */
     @keyframes pulseRing {
-      0%, 100% { transform: scale(1); opacity: 0.25; }
-      50% { transform: scale(1.04); opacity: 0.45; }
+      0%, 100% { transform: scale(1); opacity: 0.2; }
+      50% { transform: scale(1.03); opacity: 0.35; }
     }
     .animate-ring {
       animation: pulseRing 6s ease-in-out infinite;
+      will-change: transform, opacity;
     }
 
     /* Floating Badges */
     @keyframes floatBadge {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-6px); }
     }
     .float-item-1 { animation: floatBadge 4s ease-in-out infinite; }
     .float-item-2 { animation: floatBadge 5s ease-in-out infinite 1.5s; }
@@ -82,7 +74,7 @@
       100% { transform: rotate(360deg); }
     }
     .loader-ring {
-      animation: spinBorder 2s linear infinite;
+      animation: spinBorder 1.5s linear infinite;
     }
 
     .preloader-hidden {
@@ -90,7 +82,7 @@
       visibility: hidden !important;
       pointer-events: none !important;
       transform: translateY(-100%) !important;
-      transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1) !important;
+      transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1) !important;
     }
 
     .cursor-blink {
@@ -101,11 +93,11 @@
       50% { opacity: 0; }
     }
 
-    /* Smooth Scroll Reveal */
+    /* Lightweight Scroll Reveal */
     .reveal-on-scroll {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
       will-change: opacity, transform;
     }
     .reveal-on-scroll.revealed {
@@ -114,10 +106,10 @@
     }
   </style>
 </head>
-<body class="bg-[#f8fafc] dark:bg-[#06070a] text-slate-800 dark:text-slate-300 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white transition-colors duration-300">
+<body class="bg-[#f8fafc] dark:bg-[#06070a] text-slate-800 dark:text-slate-300 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white transition-colors duration-200">
 
   <!-- ================= PRELOADER (6 SECONDS) ================= -->
-  <div id="preloader" class="fixed inset-0 bg-[#06070a] z-[99999] flex flex-col justify-between items-center p-8 sm:p-12 transition-all duration-700">
+  <div id="preloader" class="fixed inset-0 bg-[#06070a] z-[99999] flex flex-col justify-between items-center p-8 sm:p-12 transition-all duration-500">
     <div class="w-full max-w-4xl flex items-center justify-between text-xs font-mono text-slate-500 uppercase tracking-widest border-b border-white/5 pb-4">
       <div class="flex items-center gap-2">
         <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-ping"></span>
@@ -127,12 +119,12 @@
     </div>
 
     <div class="flex flex-col items-center justify-center space-y-6 my-auto">
-      <div class="relative w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center">
-        <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-indigo-500 border-r-purple-500 border-b-cyan-400 loader-ring shadow-[0_0_25px_rgba(99,102,241,0.4)]"></div>
+      <div class="relative w-40 h-40 sm:w-48 sm:h-48 flex items-center justify-center">
+        <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-indigo-500 border-r-purple-500 border-b-cyan-400 loader-ring shadow-[0_0_20px_rgba(99,102,241,0.3)]"></div>
         <div class="absolute inset-2 rounded-full border border-dashed border-white/10"></div>
 
         <div class="flex flex-col items-center justify-center text-center z-10">
-          <i id="toolIcon" class="fab fa-php text-5xl sm:text-6xl text-indigo-400 drop-shadow-[0_0_20px_rgba(99,102,241,0.6)]"></i>
+          <i id="toolIcon" class="fab fa-php text-5xl sm:text-6xl text-indigo-400"></i>
           <span id="loadPercent" class="mt-2 text-base sm:text-lg font-black text-white font-mono tracking-wider">0%</span>
         </div>
       </div>
@@ -146,7 +138,7 @@
         </p>
       </div>
 
-      <div class="w-72 sm:w-96 glass-card rounded-2xl p-3 border-white/10 font-mono text-[11px] space-y-1 text-left shadow-2xl bg-[#0e111d]/90 text-slate-300">
+      <div class="w-72 sm:w-96 rounded-2xl p-3 border border-white/10 font-mono text-[11px] space-y-1 text-left shadow-xl bg-[#0e111d] text-slate-300">
         <div class="flex items-center gap-1.5 pb-1 border-b border-white/5 text-slate-500 text-[10px]">
           <span class="w-2 h-2 rounded-full bg-red-500/60"></span>
           <span class="w-2 h-2 rounded-full bg-yellow-500/60"></span>
@@ -163,16 +155,16 @@
     </div>
   </div>
 
-  <!-- Ambient Glowing Blobs & Moving Particles -->
+  <!-- Ambient Blobs & High-FPS Particle Canvas -->
   <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
-  <div class="fixed top-[-10%] left-[-5%] w-[550px] h-[550px] bg-indigo-500/10 dark:bg-indigo-600/15 blur-[140px] pointer-events-none rounded-full animate-blob-1 z-0"></div>
-  <div class="fixed top-[45%] right-[-5%] w-[500px] h-[500px] bg-cyan-500/10 dark:bg-cyan-600/10 blur-[140px] pointer-events-none rounded-full animate-blob-2 z-0"></div>
+  <div class="fixed top-[-10%] left-[-5%] w-[450px] h-[450px] bg-indigo-500/10 dark:bg-indigo-600/15 blur-[100px] pointer-events-none rounded-full z-0"></div>
+  <div class="fixed top-[45%] right-[-5%] w-[400px] h-[400px] bg-cyan-500/10 dark:bg-cyan-600/10 blur-[100px] pointer-events-none rounded-full z-0"></div>
 
   <!-- Floating Navigation Bar -->
   <header class="fixed top-5 left-0 w-full z-50 px-4">
-    <nav class="max-w-5xl mx-auto h-14 rounded-full glass-card px-6 flex items-center justify-between shadow-xl">
+    <nav class="max-w-5xl mx-auto h-14 rounded-full glass-card px-6 flex items-center justify-between shadow-md">
       <a href="#home" class="text-sm font-black tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
-        <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse shadow-[0_0_8px_#6366f1]"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse"></span>
         RONJHAY<span class="text-indigo-600 dark:text-indigo-400">.DEV</span>
       </a>
       
@@ -188,7 +180,7 @@
           <i id="themeIcon" class="fas fa-sun text-sm text-amber-500"></i>
         </button>
 
-        <a href="#contact" class="px-5 py-2 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-wider transition shadow-lg shadow-indigo-600/30">
+        <a href="#contact" class="px-5 py-2 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-wider transition shadow-md">
           Let's Talk <i class="fas fa-arrow-right text-[10px] ml-1"></i>
         </a>
       </div>
@@ -198,7 +190,7 @@
   <!-- Main Content Container -->
   <main class="relative z-10 max-w-6xl mx-auto px-6 space-y-20 pb-20">
 
-    <!-- ================= HERO SECTION (HOME) ================= -->
+    <!-- ================= HERO SECTION ================= -->
     <section id="home" class="min-h-[85vh] flex items-center pt-24 reveal-on-scroll">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center w-full">
         
@@ -224,44 +216,43 @@
           </p>
 
           <div class="flex flex-wrap items-center gap-4 pt-2">
-            <a href="#contact" class="px-7 py-3.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-wider transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+            <a href="#contact" class="px-7 py-3.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-wider transition shadow-md flex items-center gap-2">
               Let's Work Together <i class="fas fa-arrow-right text-[11px]"></i>
             </a>
 
             <div class="flex items-center gap-2.5 pl-2">
-              <a href="https://github.com/ronjhay7" target="_blank" class="w-10 h-10 rounded-full bg-slate-200/80 dark:bg-white/10 hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-600 text-slate-700 dark:text-white flex items-center justify-center transition shadow-sm" title="GitHub">
+              <a href="https://github.com/ronjhay7" target="_blank" class="w-10 h-10 rounded-full bg-slate-200 dark:bg-white/10 hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-600 text-slate-700 dark:text-white flex items-center justify-center transition shadow-sm" title="GitHub">
                 <i class="fab fa-github text-sm"></i>
               </a>
-              <a href="mailto:ronjhay@example.com" class="w-10 h-10 rounded-full bg-slate-200/80 dark:bg-white/10 hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-600 text-slate-700 dark:text-white flex items-center justify-center transition shadow-sm" title="Email">
+              <a href="mailto:ronjhay@example.com" class="w-10 h-10 rounded-full bg-slate-200 dark:bg-white/10 hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-600 text-slate-700 dark:text-white flex items-center justify-center transition shadow-sm" title="Email">
                 <i class="fas fa-envelope text-sm"></i>
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Right: Modern Photo Frame (5 Cols) -->
+        <!-- Right: Photo Frame (5 Cols) -->
         <div class="lg:col-span-5 relative flex items-center justify-center py-4">
           <div class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full border border-indigo-500/20 dark:border-indigo-500/30 animate-ring pointer-events-none"></div>
           <div class="absolute w-56 h-56 sm:w-80 sm:h-80 rounded-full border border-dashed border-indigo-500/25 dark:border-cyan-400/20 pointer-events-none"></div>
-          <div class="absolute w-44 h-44 sm:w-64 sm:h-64 rounded-full bg-indigo-600/15 dark:bg-indigo-500/20 blur-3xl pointer-events-none"></div>
 
-          <div class="relative w-64 h-80 sm:w-72 sm:h-96 rounded-3xl overflow-hidden glass-card p-2 border-slate-300 dark:border-indigo-500/40 shadow-2xl z-10 group">
-            <img src="profile.jpg" alt="Ronjhay Pagador" class="w-full h-full object-cover object-top rounded-2xl group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80'" />
+          <div class="relative w-64 h-80 sm:w-72 sm:h-96 rounded-3xl overflow-hidden glass-card p-2 border-slate-300 dark:border-indigo-500/40 shadow-xl z-10 group">
+            <img src="profile.jpg" alt="Ronjhay Pagador" class="w-full h-full object-cover object-top rounded-2xl group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80'" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-2xl"></div>
             
             <div class="absolute bottom-4 left-4 right-4 text-center">
-              <span class="text-xs font-mono font-bold bg-slate-900/80 backdrop-blur-md text-emerald-400 px-3 py-1 rounded-full border border-emerald-500/30">
+              <span class="text-xs font-mono font-bold bg-slate-900 text-emerald-400 px-3 py-1 rounded-full border border-emerald-500/30">
                 ● Ready to build
               </span>
             </div>
           </div>
 
-          <div class="absolute -top-2 right-2 sm:right-6 glass-card px-3.5 py-2 rounded-2xl flex items-center gap-2 shadow-xl z-20 float-item-1 border border-indigo-500/30">
+          <div class="absolute -top-2 right-2 sm:right-6 glass-card px-3.5 py-2 rounded-2xl flex items-center gap-2 shadow-lg z-20 float-item-1 border border-indigo-500/30">
             <i class="fab fa-php text-indigo-500 text-lg"></i>
             <span class="text-xs font-bold text-slate-800 dark:text-white">PHP Backend</span>
           </div>
 
-          <div class="absolute bottom-2 left-0 sm:left-4 glass-card px-3.5 py-2 rounded-2xl flex items-center gap-2 shadow-xl z-20 float-item-2 border border-blue-500/30">
+          <div class="absolute bottom-2 left-0 sm:left-4 glass-card px-3.5 py-2 rounded-2xl flex items-center gap-2 shadow-lg z-20 float-item-2 border border-blue-500/30">
             <i class="fas fa-plug text-cyan-500 text-sm"></i>
             <span class="text-xs font-bold text-slate-800 dark:text-white">API Integration</span>
           </div>
@@ -270,7 +261,7 @@
       </div>
     </section>
 
-    <!-- ================= WHAT I WORK WITH (4 SOLID CARDS) ================= -->
+    <!-- ================= WHAT I WORK WITH ================= -->
     <section id="skills" class="space-y-6 pt-10 reveal-on-scroll">
       <div class="flex items-center gap-3">
         <span class="w-6 h-[2px] bg-indigo-500"></span>
@@ -278,8 +269,6 @@
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        
-        <!-- Skill 1 -->
         <div class="glass-card rounded-3xl p-6 space-y-3 group">
           <div class="flex items-center justify-between">
             <i class="fab fa-php text-3xl text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition"></i>
@@ -289,7 +278,6 @@
           <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Handling server logic, secure logins, and creating custom API endpoints</p>
         </div>
 
-        <!-- Skill 2 -->
         <div class="glass-card rounded-3xl p-6 space-y-3 group">
           <div class="flex items-center justify-between">
             <i class="fas fa-database text-2xl text-blue-600 dark:text-blue-400 group-hover:scale-110 transition"></i>
@@ -299,7 +287,6 @@
           <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Designing clean relational tables and writing fast, secure database queries</p>
         </div>
 
-        <!-- Skill 3 -->
         <div class="glass-card rounded-3xl p-6 space-y-3 group">
           <div class="flex items-center justify-between">
             <i class="fas fa-fire text-2xl text-amber-600 dark:text-amber-500 group-hover:scale-110 transition"></i>
@@ -309,7 +296,6 @@
           <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Realtime data sync, user authentication, and cloud file storage</p>
         </div>
 
-        <!-- Skill 4 -->
         <div class="glass-card rounded-3xl p-6 space-y-3 group">
           <div class="flex items-center justify-between">
             <i class="fab fa-css3-alt text-3xl text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition"></i>
@@ -318,7 +304,6 @@
           <h4 class="text-base font-bold text-slate-900 dark:text-white">Tailwind CSS & JS</h4>
           <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Building smooth, modern, and mobile-friendly user interfaces</p>
         </div>
-
       </div>
     </section>
 
@@ -378,8 +363,6 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
-        <!-- Project 1 -->
         <div class="glass-card rounded-3xl p-8 flex flex-col justify-between space-y-6 group">
           <div class="space-y-4">
             <div class="flex items-center justify-between text-xs text-slate-500 font-mono">
@@ -413,7 +396,6 @@
           </div>
         </div>
 
-        <!-- Project 2 -->
         <div class="glass-card rounded-3xl p-8 flex flex-col justify-between space-y-6 group">
           <div class="space-y-4">
             <div class="flex items-center justify-between text-xs text-slate-500 font-mono">
@@ -446,7 +428,6 @@
             </span>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -461,7 +442,7 @@
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
-          <a href="mailto:ronjhay@example.com" class="px-8 py-3.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-wider transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+          <a href="mailto:ronjhay@example.com" class="px-8 py-3.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-wider transition shadow-md flex items-center gap-2">
             <i class="fas fa-envelope"></i> Send an Email
           </a>
           <a href="https://github.com/ronjhay7" target="_blank" class="px-8 py-3.5 rounded-full bg-slate-100 dark:bg-white/[0.04] border border-slate-300 dark:border-white/10 hover:border-slate-400 dark:hover:border-white/20 text-slate-800 dark:text-white text-xs font-bold uppercase tracking-wider transition flex items-center gap-2">
@@ -477,7 +458,7 @@
 
   </main>
 
-  <!-- ================= SCRIPTS ================= -->
+  <!-- ================= ULTRA-FAST OPTIMIZED SCRIPTS ================= -->
   <script>
     // 1. THEME TOGGLE
     (function() {
@@ -507,7 +488,7 @@
       });
     })();
 
-    // 2. CONTINUOUS TYPEWRITER
+    // 2. TYPEWRITER (Low CPU load)
     (function() {
       const targetText = "FULL-STACK WEB DEVELOPER";
       let charIndex = 0;
@@ -523,14 +504,14 @@
           charIndex++;
         }
 
-        let typeSpeed = isDeleting ? 40 : 80;
+        let typeSpeed = isDeleting ? 35 : 75;
 
         if (!isDeleting && charIndex === targetText.length) {
-          typeSpeed = 2200;
+          typeSpeed = 2000;
           isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
           isDeleting = false;
-          typeSpeed = 400;
+          typeSpeed = 350;
         }
 
         setTimeout(typeLoop, typeSpeed);
@@ -539,7 +520,7 @@
       setTimeout(typeLoop, 1000);
     })();
 
-    // 3. PRELOADER (6 SECONDS)
+    // 3. PRELOADER
     (function() {
       const preloader = document.getElementById('preloader');
       const loadPercent = document.getElementById('loadPercent');
@@ -587,7 +568,7 @@
           setTimeout(() => {
             preloader.style.display = 'none';
             triggerScrollObserver();
-          }, 800);
+          }, 600);
         }
       }
 
@@ -606,18 +587,18 @@
           }
         });
       }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -30px 0px'
+        threshold: 0.1,
+        rootMargin: '0px 0px -20px 0px'
       });
 
       revealElements.forEach(el => observer.observe(el));
     }
 
-    // 5. PARTICLES
+    // 5. LIGHTWEIGHT HIGH-FPS PARTICLES (Low memory footprint)
     (function() {
       const canvas = document.getElementById('particleCanvas');
       if (!canvas) return;
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext('2d', { alpha: true });
       let particles = [];
       let width, height;
 
@@ -625,14 +606,14 @@
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
         particles = [];
-        const count = Math.floor(width / 24);
+        const count = Math.min(30, Math.floor(width / 45)); // Balanced count
         for (let i = 0; i < count; i++) {
           particles.push({
             x: Math.random() * width,
             y: Math.random() * height,
-            vx: (Math.random() - 0.5) * 0.45,
-            vy: (Math.random() - 0.5) * 0.45,
-            r: Math.random() * 1.5 + 0.8
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: (Math.random() - 0.5) * 0.35,
+            r: Math.random() * 1.2 + 0.8
           });
         }
       }
@@ -640,10 +621,11 @@
       function render() {
         ctx.clearRect(0, 0, width, height);
         const isDark = document.documentElement.classList.contains('dark');
-        ctx.fillStyle = isDark ? 'rgba(99, 102, 241, 0.45)' : 'rgba(99, 102, 241, 0.25)';
-        ctx.strokeStyle = isDark ? 'rgba(99, 102, 241, 0.06)' : 'rgba(99, 102, 241, 0.05)';
+        ctx.fillStyle = isDark ? 'rgba(99, 102, 241, 0.4)' : 'rgba(99, 102, 241, 0.2)';
+        ctx.strokeStyle = isDark ? 'rgba(99, 102, 241, 0.05)' : 'rgba(99, 102, 241, 0.04)';
 
-        particles.forEach((p, i) => {
+        for (let i = 0; i < particles.length; i++) {
+          let p = particles[i];
           p.x += p.vx;
           p.y += p.vy;
 
@@ -655,20 +637,21 @@
           ctx.fill();
 
           for (let j = i + 1; j < particles.length; j++) {
-            const p2 = particles[j];
-            const d = Math.hypot(p.x - p2.x, p.y - p2.y);
-            if (d < 115) {
+            let p2 = particles[j];
+            let dx = p.x - p2.x;
+            let dy = p.y - p2.y;
+            if (Math.abs(dx) < 100 && Math.abs(dy) < 100) {
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(p2.x, p2.y);
               ctx.stroke();
             }
           }
-        });
+        }
         requestAnimationFrame(render);
       }
 
-      window.addEventListener('resize', init);
+      window.addEventListener('resize', init, { passive: true });
       init();
       render();
     })();
