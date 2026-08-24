@@ -49,23 +49,32 @@
     .bar-4 { animation: soundwave 0.9s ease-in-out infinite 0.1s; }
     .bar-5 { animation: soundwave 1.2s ease-in-out infinite 0.3s; }
 
-    /* SVG Radial Circle Animation */
+    /* Circular SVG Styling */
     .radial-ring {
       stroke-dasharray: 440;
       stroke-dashoffset: 440;
-      transition: stroke-dashoffset 0.08s linear;
       transform: rotate(-90deg);
       transform-origin: 50% 50%;
+      transition: stroke-dashoffset 0.05s linear;
+    }
+    .tool-icon-fade {
+      transition: all 0.25s ease;
     }
 
-    .tool-icon-fade {
-      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Preloader Exit Animation */
+    #preloader {
+      transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+    }
+    #preloader.loaded {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none !important;
     }
   </style>
 </head>
 <body class="text-slate-300 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
 
-  <div id="preloader" class="fixed inset-0 bg-[#06070a] z-[99999] flex flex-col justify-between items-center p-8 sm:p-12 transition-transform duration-1000 ease-[cubic-bezier(0.85,0,0.15,1)]">
+  <div id="preloader" class="fixed inset-0 bg-[#06070a] z-[99999] flex flex-col justify-between items-center p-8 sm:p-12">
     
     <div class="w-full max-w-4xl flex items-center justify-between text-xs font-mono text-slate-500 uppercase tracking-widest border-b border-white/5 pb-4">
       <div class="flex items-center gap-2">
@@ -81,8 +90,7 @@
     <div class="flex flex-col items-center justify-center space-y-6 my-auto">
       
       <div class="relative w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center">
-        
-        <div class="absolute inset-0 rounded-full border border-dashed border-indigo-500/20 animate-spin" style="animation-duration: 18s;"></div>
+        <div class="absolute inset-0 rounded-full border border-dashed border-indigo-500/25 animate-spin" style="animation-duration: 15s;"></div>
         
         <svg class="w-full h-full" viewBox="0 0 160 160">
           <circle cx="80" cy="80" r="70" stroke="rgba(255,255,255,0.05)" stroke-width="6" fill="transparent" />
@@ -125,7 +133,7 @@
 
     <div class="w-full max-w-4xl flex items-center justify-between text-xs font-mono text-slate-500 border-t border-white/5 pt-4">
       <span>INITIALIZATION PROGRESS</span>
-      <span class="text-slate-400 font-bold">6.0s SYSTEM TEST</span>
+      <span class="text-slate-400 font-bold">6.0s SEQUENCE</span>
     </div>
   </div>
 
@@ -135,19 +143,19 @@
 
   <header class="fixed top-5 left-0 w-full z-50 px-4">
     <nav class="max-w-4xl mx-auto h-14 rounded-full glass-card px-6 flex items-center justify-between shadow-2xl">
-      <a href="#home" class="interactive-link text-sm font-extrabold tracking-wider text-white flex items-center gap-2">
+      <a href="#home" class="text-sm font-extrabold tracking-wider text-white flex items-center gap-2">
         <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse shadow-[0_0_8px_#6366f1]"></span>
         RONJHAY<span class="text-indigo-400">.DEV</span>
       </a>
       
       <div class="hidden sm:flex items-center gap-6 text-xs font-semibold text-slate-400">
-        <a href="#home" class="interactive-link hover:text-white transition">Home</a>
-        <a href="#about" class="interactive-link hover:text-white transition">About</a>
-        <a href="#skills" class="interactive-link hover:text-white transition">Stack</a>
-        <a href="#projects" class="interactive-link hover:text-white transition">Projects</a>
+        <a href="#home" class="hover:text-white transition">Home</a>
+        <a href="#about" class="hover:text-white transition">About</a>
+        <a href="#skills" class="hover:text-white transition">Stack</a>
+        <a href="#projects" class="hover:text-white transition">Projects</a>
       </div>
 
-      <a href="#contact" class="interactive-link px-4 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition shadow-lg shadow-indigo-600/30">
+      <a href="#contact" class="px-4 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition shadow-lg shadow-indigo-600/30">
         Let's Talk <i class="fas fa-arrow-right text-[10px] ml-1"></i>
       </a>
     </nav>
@@ -177,10 +185,10 @@
 
           <div class="space-y-4 pt-2">
             <div class="flex flex-wrap items-center gap-3">
-              <a href="#projects" class="interactive-link px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+              <a href="#projects" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
                 View Work <i class="fas fa-arrow-right text-[10px]"></i>
               </a>
-              <a href="#contact" class="interactive-link px-5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-white/20 text-slate-200 text-xs font-semibold transition">
+              <a href="#contact" class="px-5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-white/20 text-slate-200 text-xs font-semibold transition">
                 Contact Me
               </a>
             </div>
@@ -460,69 +468,127 @@
       }
     ];
 
-    const totalDuration = 6000; // Exact 6 Seconds
-    const intervalTime = 40;
+    const totalDuration = 6000; // Exact 6.0 seconds
+    const intervalTime = 50;
     const totalSteps = totalDuration / intervalTime;
     let currentStep = 0;
     let currentToolIndex = -1;
+
+    function finishLoading() {
+      if (preloader) {
+        preloader.classList.add('loaded');
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 850);
+      }
+    }
 
     const preloaderTimer = setInterval(() => {
       currentStep++;
       const progress = Math.min(100, Math.floor((currentStep / totalSteps) * 100));
       
-      // Update HUD percentage
-      loadPercent.textContent = progress + '%';
+      if (loadPercent) loadPercent.textContent = progress + '%';
 
-      // Update Radial SVG stroke offset
-      const offset = totalCircumference - (progress / 100) * totalCircumference;
-      radialProgress.style.strokeDashoffset = offset;
+      if (radialProgress) {
+        const offset = totalCircumference - (progress / 100) * totalCircumference;
+        radialProgress.style.strokeDashoffset = offset;
+      }
 
-      // Switch tool every ~1000ms
+      // Switch tool roughly every second
       const toolIndex = Math.min(5, Math.floor((progress / 100) * 6));
-      if (toolIndex !== currentToolIndex) {
+      if (toolIndex !== currentToolIndex && toolsSequence[toolIndex]) {
         currentToolIndex = toolIndex;
         const currentTool = toolsSequence[toolIndex];
 
-        toolIcon.style.opacity = '0';
-        toolIcon.style.transform = 'scale(0.8)';
-        toolName.style.opacity = '0';
+        if (toolIcon) {
+          toolIcon.style.opacity = '0';
+          toolIcon.style.transform = 'scale(0.85)';
+        }
+        if (toolName) toolName.style.opacity = '0';
 
         setTimeout(() => {
-          toolIcon.className = currentTool.icon + ' text-5xl sm:text-6xl tool-icon-fade drop-shadow-[0_0_20px_rgba(99,102,241,0.6)]';
-          toolName.textContent = currentTool.name;
-          toolDetail.textContent = currentTool.detail;
-          terminalLog.textContent = currentTool.log;
-
-          toolIcon.style.opacity = '1';
-          toolIcon.style.transform = 'scale(1)';
-          toolName.style.opacity = '1';
+          if (toolIcon) {
+            toolIcon.className = currentTool.icon + ' text-5xl sm:text-6xl tool-icon-fade drop-shadow-[0_0_20px_rgba(99,102,241,0.6)]';
+            toolIcon.style.opacity = '1';
+            toolIcon.style.transform = 'scale(1)';
+          }
+          if (toolName) {
+            toolName.textContent = currentTool.name;
+            toolName.style.opacity = '1';
+          }
+          if (toolDetail) toolDetail.textContent = currentTool.detail;
+          if (terminalLog) terminalLog.textContent = currentTool.log;
         }, 120);
       }
 
       if (currentStep >= totalSteps) {
         clearInterval(preloaderTimer);
-        terminalLog.textContent = 'BOOT COMPLETE -> SYSTEM ONLINE';
-
-        setTimeout(() => {
-          preloader.style.transform = 'translateY(-100%)';
-        }, 350);
+        if (terminalLog) terminalLog.textContent = 'BOOT COMPLETE -> SYSTEM ONLINE';
+        setTimeout(finishLoading, 400);
       }
     }, intervalTime);
 
+    // Hard fallback: Force dismiss after 6.8s no matter what
+    setTimeout(finishLoading, 6800);
+
     // Background Canvas Particles
     const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let width, height;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let width, height;
 
-    function initCanvas() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      particles = [];
-      const count = Math.floor(width / 24);
-      for (let i = 0; i < count; i++) {
-        particles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (
+      function initCanvas() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        particles = [];
+        const count = Math.floor(width / 24);
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            radius: Math.random() * 1.5 + 0.8
+          });
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = 'rgba(99, 102, 241, 0.4)';
+        ctx.strokeStyle = 'rgba(99, 102, 241, 0.05)';
+
+        particles.forEach((p, i) => {
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0 || p.x > width) p.vx *= -1;
+          if (p.y < 0 || p.y > height) p.vy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fill();
+
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+            if (dist < 110) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.stroke();
+            }
+          }
+        });
+        requestAnimationFrame(animate);
+      }
+
+      window.addEventListener('resize', initCanvas);
+      initCanvas();
+      animate();
+    }
+  </script>
+
+</body>
+</html>
