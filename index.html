@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -49,68 +49,90 @@
     .bar-4 { animation: soundwave 0.9s ease-in-out infinite 0.1s; }
     .bar-5 { animation: soundwave 1.2s ease-in-out infinite 0.3s; }
 
-    /* Tool Icon Transition */
+    /* SVG Radial Circle Animation */
+    .radial-ring {
+      stroke-dasharray: 440;
+      stroke-dashoffset: 440;
+      transition: stroke-dashoffset 0.08s linear;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+
     .tool-icon-fade {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
   </style>
 </head>
 <body class="text-slate-300 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
 
-  <!-- ================= 6-SECOND CINEMATIC TOOL LOGO PRELOADER ================= -->
-  <div id="preloader" class="fixed inset-0 bg-[#06070a] z-[99999] flex flex-col justify-between p-8 sm:p-14 transition-transform duration-1000 ease-[cubic-bezier(0.85,0,0.15,1)]">
+  <div id="preloader" class="fixed inset-0 bg-[#06070a] z-[99999] flex flex-col justify-between items-center p-8 sm:p-12 transition-transform duration-1000 ease-[cubic-bezier(0.85,0,0.15,1)]">
     
-    <!-- Preloader Header -->
-    <div class="flex items-center justify-between text-xs font-mono text-slate-500 uppercase tracking-widest">
+    <div class="w-full max-w-4xl flex items-center justify-between text-xs font-mono text-slate-500 uppercase tracking-widest border-b border-white/5 pb-4">
       <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>
-        <span>Environment Boot</span>
+        <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-ping"></span>
+        <span class="text-slate-300 font-bold">RONJHAY<span class="text-indigo-400">.SYSTEM</span></span>
       </div>
-      <div>6.0s Sequence</div>
+      <div class="flex items-center gap-4">
+        <span class="hidden sm:inline text-slate-600">SECURE_BOOT_v2.6</span>
+        <span class="text-emerald-400 font-bold">ONLINE</span>
+      </div>
     </div>
 
-    <!-- Preloader Center: Cycling Logos & Tech Title -->
-    <div class="flex flex-col items-center justify-center space-y-6">
+    <div class="flex flex-col items-center justify-center space-y-6 my-auto">
       
-      <!-- Glowing Animated Icon Box -->
-      <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-3xl glass-card border-indigo-500/30 flex items-center justify-center shadow-[0_0_50px_rgba(99,102,241,0.2)]">
-        <div class="absolute inset-0 rounded-3xl border-2 border-indigo-500/20 animate-pulse"></div>
-        <i id="toolIcon" class="fab fa-php text-5xl sm:text-6xl text-indigo-400 tool-icon-fade"></i>
+      <div class="relative w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center">
+        
+        <div class="absolute inset-0 rounded-full border border-dashed border-indigo-500/20 animate-spin" style="animation-duration: 18s;"></div>
+        
+        <svg class="w-full h-full" viewBox="0 0 160 160">
+          <circle cx="80" cy="80" r="70" stroke="rgba(255,255,255,0.05)" stroke-width="6" fill="transparent" />
+          <circle id="radialProgress" class="radial-ring" cx="80" cy="80" r="70" stroke="url(#gradientStroke)" stroke-width="6" stroke-linecap="round" fill="transparent" />
+          <defs>
+            <linearGradient id="gradientStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#6366f1" />
+              <stop offset="50%" stop-color="#a855f7" />
+              <stop offset="100%" stop-color="#06b6d4" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <div class="absolute flex flex-col items-center justify-center text-center">
+          <i id="toolIcon" class="fab fa-php text-5xl sm:text-6xl text-indigo-400 tool-icon-fade drop-shadow-[0_0_20px_rgba(99,102,241,0.6)]"></i>
+          <span id="loadPercent" class="mt-2 text-sm sm:text-base font-black text-white font-mono tracking-wider">0%</span>
+        </div>
       </div>
 
-      <!-- Active Tool Name & Subtitle -->
-      <div class="text-center space-y-2">
-        <h2 id="toolName" class="text-2xl sm:text-3xl font-black tracking-wider text-white tool-icon-fade">
-          PHP & PDO ENGINE
+      <div class="text-center space-y-1">
+        <h2 id="toolName" class="text-xl sm:text-2xl font-extrabold tracking-wider text-white tool-icon-fade">
+          PHP (PDO) CORE
         </h2>
-        <p id="toolDetail" class="text-xs font-mono text-indigo-400 tracking-widest uppercase">
-          [1/6] Initializing server runtime...
+        <p id="toolDetail" class="text-[11px] font-mono text-indigo-400 tracking-widest uppercase">
+          [1/6] Initializing secure server runtime...
         </p>
       </div>
 
+      <div class="w-72 sm:w-96 glass-card rounded-2xl p-3 border-white/10 font-mono text-[11px] space-y-1 text-left shadow-2xl">
+        <div class="flex items-center gap-1.5 pb-1 border-b border-white/5 text-slate-500 text-[10px]">
+          <span class="w-2 h-2 rounded-full bg-red-500/60"></span>
+          <span class="w-2 h-2 rounded-full bg-yellow-500/60"></span>
+          <span class="w-2 h-2 rounded-full bg-emerald-500/60"></span>
+          <span class="ml-1 text-slate-400">terminal@ronjhay:~</span>
+        </div>
+        <p class="text-slate-400 truncate"><span class="text-emerald-400">root@sys:</span> <span id="terminalLog">Starting dependencies handshake...</span></p>
+      </div>
+
     </div>
 
-    <!-- Preloader Footer: Counter & 6s Progress Bar -->
-    <div class="space-y-3">
-      <div class="flex justify-between items-end font-mono text-xs text-slate-400">
-        <span class="flex items-center gap-2">
-          <i class="fas fa-terminal text-indigo-400 text-[10px]"></i>
-          <span id="terminalStatus">Loading core dependencies...</span>
-        </span>
-        <span id="loadPercent" class="text-2xl sm:text-4xl font-black text-white font-mono">0%</span>
-      </div>
-      <div class="w-full h-[3px] bg-white/10 rounded-full overflow-hidden">
-        <div id="preloaderBar" class="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 w-0 transition-all duration-75 ease-linear shadow-[0_0_15px_#6366f1]"></div>
-      </div>
+    <div class="w-full max-w-4xl flex items-center justify-between text-xs font-mono text-slate-500 border-t border-white/5 pt-4">
+      <span>INITIALIZATION PROGRESS</span>
+      <span class="text-slate-400 font-bold">6.0s SYSTEM TEST</span>
     </div>
   </div>
 
-  <!-- Background Canvas & Glow -->
   <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
   <div class="fixed top-[-10%] left-[-5%] w-[550px] h-[550px] bg-indigo-600/15 blur-[150px] pointer-events-none rounded-full animate-blob-1 z-0"></div>
   <div class="fixed top-[45%] right-[-5%] w-[500px] h-[500px] bg-purple-600/10 blur-[150px] pointer-events-none rounded-full animate-blob-2 z-0"></div>
 
-  <!-- Navigation Bar -->
   <header class="fixed top-5 left-0 w-full z-50 px-4">
     <nav class="max-w-4xl mx-auto h-14 rounded-full glass-card px-6 flex items-center justify-between shadow-2xl">
       <a href="#home" class="interactive-link text-sm font-extrabold tracking-wider text-white flex items-center gap-2">
@@ -131,10 +153,8 @@
     </nav>
   </header>
 
-  <!-- Main Container -->
   <main class="relative z-10 max-w-6xl mx-auto pt-32 px-6 space-y-24">
 
-    <!-- HERO BENTO -->
     <section id="home" class="pt-6">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
@@ -176,7 +196,6 @@
           </div>
         </div>
 
-        <!-- Skills Grid Card -->
         <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-8 space-y-6" id="skills">
           <div class="flex items-center justify-between border-b border-white/5 pb-4">
             <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-300">
@@ -245,7 +264,6 @@
       </div>
     </section>
 
-    <!-- ABOUT SECTION -->
     <section id="about" class="space-y-6">
       <div class="flex items-center gap-3">
         <span class="w-6 h-[2px] bg-indigo-500"></span>
@@ -272,7 +290,7 @@
           <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400">What I Deliver</h4>
           <ul class="space-y-3 text-xs text-slate-300">
             <li class="flex items-center gap-2">
-              <i class="fas fa-shield-alt text-indigo-400"></i> Secure Session Authentication
+              <i class="fas fa-shield-alt text-indigo-400"></i> Secure Role Authentication
             </li>
             <li class="flex items-center gap-2">
               <i class="fas fa-database text-blue-400"></i> Relational MySQL Prepared Queries
@@ -288,7 +306,6 @@
       </div>
     </section>
 
-    <!-- PROJECTS SECTION -->
     <section id="projects" class="space-y-6">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
@@ -302,7 +319,6 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <!-- Project 1: Apartment Hunting System -->
         <div class="glass-card rounded-3xl p-8 flex flex-col justify-between space-y-6 group">
           <div class="space-y-4">
             <div class="flex items-center justify-between text-xs text-slate-500 font-mono">
@@ -335,7 +351,6 @@
           </div>
         </div>
 
-        <!-- Project 2: HealthConsult -->
         <div class="glass-card rounded-3xl p-8 flex flex-col justify-between space-y-6 group">
           <div class="space-y-4">
             <div class="flex items-center justify-between text-xs text-slate-500 font-mono">
@@ -371,7 +386,6 @@
       </div>
     </section>
 
-    <!-- CONTACT SECTION -->
     <section id="contact" class="glass-card rounded-3xl p-8 sm:p-12 text-center space-y-6 border-indigo-500/20">
       <div class="max-w-xl mx-auto space-y-3">
         <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Let's build your next project.</h2>
@@ -396,53 +410,53 @@
 
   </main>
 
-  <!-- ================= 6-SECOND LOGO PRELOADER SCRIPT ================= -->
   <script>
     const preloader = document.getElementById('preloader');
     const loadPercent = document.getElementById('loadPercent');
-    const preloaderBar = document.getElementById('preloaderBar');
+    const radialProgress = document.getElementById('radialProgress');
     const toolIcon = document.getElementById('toolIcon');
     const toolName = document.getElementById('toolName');
     const toolDetail = document.getElementById('toolDetail');
-    const terminalStatus = document.getElementById('terminalStatus');
+    const terminalLog = document.getElementById('terminalLog');
 
-    // Sequence of tools across the 6 seconds (1 second per tool)
+    const totalCircumference = 2 * Math.PI * 70; // ~440px
+
     const toolsSequence = [
       {
         icon: 'fab fa-php text-indigo-400',
-        name: 'PHP & PDO BACKEND',
-        detail: '[1/6] Initializing server-side logic & sessions...',
-        status: 'Mounting core PHP environment...'
+        name: 'PHP (PDO) ENGINE',
+        detail: '[1/6] Mounting server runtime & session drivers...',
+        log: 'php -S localhost:8000 -> PDO::ATTR_ERRMODE active'
       },
       {
         icon: 'fas fa-database text-blue-400',
         name: 'MYSQL RELATIONAL DB',
-        detail: '[2/6] Connecting relational schemas & tables...',
-        status: 'Executing prepared statements...'
+        detail: '[2/6] Connecting relational schemas & foreign keys...',
+        log: 'SELECT * FROM listings WHERE status = "approved"'
       },
       {
         icon: 'fas fa-fire text-amber-500',
         name: 'GOOGLE FIREBASE',
-        detail: '[3/6] Syncing Realtime DB & Authentication...',
-        status: 'Establishing cloud listeners...'
+        detail: '[3/6] Syncing Realtime DB & auth listeners...',
+        log: 'firebase.database().ref("/appointments").on("value")'
       },
       {
         icon: 'fab fa-css3-alt text-cyan-400',
-        name: 'TAILWIND CSS',
-        detail: '[4/6] Compiling glassmorphism & responsive UI...',
-        status: 'Rendering stylesheet utilities...'
+        name: 'TAILWIND CSS 3.4',
+        detail: '[4/6] Compiling bento grid & dark glassmorphism...',
+        log: 'npx tailwindcss -i input.css -o output.css --minify'
       },
       {
         icon: 'fab fa-js text-yellow-400',
         name: 'JAVASCRIPT (ES6+)',
         detail: '[5/6] Injecting client interactions & async fetch...',
-        status: 'Loading DOM lifecycle handlers...'
+        log: 'fetch("/api/filter.php").then(res => res.json())'
       },
       {
         icon: 'fab fa-github text-slate-200',
-        name: 'GIT & REPOSITORIES',
-        detail: '[6/6] Verifying version control & deployment...',
-        status: 'Finalizing live production build...'
+        name: 'GIT & PRODUCTION REPO',
+        detail: '[6/6] Verifying deployment branches & assets...',
+        log: 'git commit -m "Deploy production release" -> PASS'
       }
     ];
 
@@ -456,35 +470,38 @@
       currentStep++;
       const progress = Math.min(100, Math.floor((currentStep / totalSteps) * 100));
       
+      // Update HUD percentage
       loadPercent.textContent = progress + '%';
-      preloaderBar.style.width = progress + '%';
 
-      // Switch tool every ~1000ms (16.6% progress)
+      // Update Radial SVG stroke offset
+      const offset = totalCircumference - (progress / 100) * totalCircumference;
+      radialProgress.style.strokeDashoffset = offset;
+
+      // Switch tool every ~1000ms
       const toolIndex = Math.min(5, Math.floor((progress / 100) * 6));
       if (toolIndex !== currentToolIndex) {
         currentToolIndex = toolIndex;
         const currentTool = toolsSequence[toolIndex];
 
-        // Smooth transition effect
         toolIcon.style.opacity = '0';
         toolIcon.style.transform = 'scale(0.8)';
         toolName.style.opacity = '0';
 
         setTimeout(() => {
-          toolIcon.className = currentTool.icon + ' text-5xl sm:text-6xl tool-icon-fade';
+          toolIcon.className = currentTool.icon + ' text-5xl sm:text-6xl tool-icon-fade drop-shadow-[0_0_20px_rgba(99,102,241,0.6)]';
           toolName.textContent = currentTool.name;
           toolDetail.textContent = currentTool.detail;
-          terminalStatus.textContent = currentTool.status;
+          terminalLog.textContent = currentTool.log;
 
           toolIcon.style.opacity = '1';
           toolIcon.style.transform = 'scale(1)';
           toolName.style.opacity = '1';
-        }, 150);
+        }, 120);
       }
 
       if (currentStep >= totalSteps) {
         clearInterval(preloaderTimer);
-        terminalStatus.textContent = 'Environment Ready. Launching...';
+        terminalLog.textContent = 'BOOT COMPLETE -> SYSTEM ONLINE';
 
         setTimeout(() => {
           preloader.style.transform = 'translateY(-100%)';
@@ -508,46 +525,4 @@
           x: Math.random() * width,
           y: Math.random() * height,
           vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
-          radius: Math.random() * 1.5 + 0.8
-        });
-      }
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = 'rgba(99, 102, 241, 0.4)';
-      ctx.strokeStyle = 'rgba(99, 102, 241, 0.05)';
-
-      particles.forEach((p, i) => {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fill();
-
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-          if (dist < 110) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
-          }
-        }
-      });
-      requestAnimationFrame(animate);
-    }
-
-    window.addEventListener('resize', initCanvas);
-    initCanvas();
-    animate();
-  </script>
-
-</body>
-</html>
+          vy: (
