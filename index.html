@@ -68,9 +68,8 @@
 </head>
 <body class="text-slate-300 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
 
-  <!-- ================= PRELOADER (6 SECONDS) ================= -->
+  <!-- ================= PRELOADER (6s) ================= -->
   <div id="preloader" class="fixed inset-0 bg-[#06070a] z-[99999] flex flex-col justify-between items-center p-8 sm:p-12 transition-all duration-700">
-    
     <div class="w-full max-w-4xl flex items-center justify-between text-xs font-mono text-slate-500 uppercase tracking-widest border-b border-white/5 pb-4">
       <div class="flex items-center gap-2">
         <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-ping"></span>
@@ -123,7 +122,7 @@
   <div class="fixed top-[-10%] left-[-5%] w-[550px] h-[550px] bg-indigo-600/15 blur-[150px] pointer-events-none rounded-full animate-blob-1 z-0"></div>
   <div class="fixed top-[45%] right-[-5%] w-[500px] h-[500px] bg-purple-600/10 blur-[150px] pointer-events-none rounded-full animate-blob-2 z-0"></div>
 
-  <!-- Fixed Navigation Bar -->
+  <!-- Navigation Bar -->
   <header class="fixed top-5 left-0 w-full z-50 px-4">
     <nav class="max-w-4xl mx-auto h-14 rounded-full glass-card px-6 flex items-center justify-between shadow-2xl">
       <a href="#home" class="text-sm font-extrabold tracking-wider text-white flex items-center gap-2">
@@ -133,8 +132,8 @@
       
       <div class="hidden sm:flex items-center gap-6 text-xs font-semibold text-slate-400">
         <a href="#home" class="hover:text-white transition">Home</a>
-        <a href="#about" class="hover:text-white transition">About</a>
         <a href="#skills" class="hover:text-white transition">Stack</a>
+        <a href="#about" class="hover:text-white transition">About</a>
         <a href="#projects" class="hover:text-white transition">Projects</a>
       </div>
 
@@ -144,14 +143,15 @@
     </nav>
   </header>
 
-  <!-- Main Content Container -->
-  <main class="relative z-10 max-w-6xl mx-auto px-6 space-y-28 pb-20">
+  <!-- Main Container -->
+  <main class="relative z-10 max-w-6xl mx-auto px-6 space-y-24 pb-20">
 
-    <!-- HERO / HOME SECTION -->
+    <!-- HERO SECTION: TEXT (LEFT) + PROFILE PHOTO (RIGHT) -->
     <section id="home" class="scroll-mt-32 pt-28">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
-        <div class="lg:col-span-5 glass-card rounded-3xl p-8 flex flex-col justify-between space-y-6">
+        <!-- Left: Hero Pitch -->
+        <div class="lg:col-span-7 glass-card rounded-3xl p-8 sm:p-10 flex flex-col justify-between space-y-6">
           <div class="space-y-4">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 text-[11px] font-semibold tracking-wide uppercase">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
@@ -163,17 +163,17 @@
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-400">Web Developer.</span>
             </h1>
 
-            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-lg">
               I architect reliable web systems with a primary focus on PHP backend development, relational MySQL schemas, Firebase cloud sync, and responsive Tailwind UI.
             </p>
           </div>
 
-          <div class="space-y-4 pt-2">
+          <div class="space-y-4 pt-4 border-t border-white/5">
             <div class="flex flex-wrap items-center gap-3">
-              <a href="#projects" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+              <a href="#projects" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
                 View Work <i class="fas fa-arrow-right text-[10px]"></i>
               </a>
-              <a href="#contact" class="px-5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-white/20 text-slate-200 text-xs font-semibold transition">
+              <a href="#contact" class="px-6 py-3 rounded-xl bg-white/[0.04] border border-white/10 hover:border-white/20 text-slate-200 text-xs font-semibold transition">
                 Contact Me
               </a>
             </div>
@@ -189,70 +189,77 @@
           </div>
         </div>
 
-        <!-- Skills Grid Card -->
-        <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-8 space-y-6" id="skills">
-          <div class="flex items-center justify-between border-b border-white/5 pb-4">
-            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-300">
-              <i class="fas fa-cubes text-indigo-400"></i> Core Tech Stack
-            </div>
-            <span class="text-[11px] text-indigo-400 font-mono">Actual Working Skills</span>
+        <!-- Right: Profile Photo Showcase Card -->
+        <div class="lg:col-span-5 glass-card rounded-3xl p-6 flex flex-col items-center justify-center relative overflow-hidden group">
+          <!-- Ambient Card Glow behind photo -->
+          <div class="absolute -top-10 -right-10 w-40 h-40 bg-indigo-500/20 blur-3xl rounded-full"></div>
+          
+          <div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-2xl overflow-hidden border-2 border-white/10 group-hover:border-indigo-500/50 transition shadow-2xl">
+            <!-- Profile Photo (Make sure profile.jpg is uploaded in repo root) -->
+            <img src="profile.jpg" alt="Ronjhay" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80'" />
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            
-            <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-indigo-500/40 transition group">
-              <div class="flex items-center justify-between mb-3">
-                <i class="fab fa-php text-2xl text-indigo-400 group-hover:scale-110 transition"></i>
-                <span class="text-xs font-mono text-indigo-400 font-bold">95%</span>
-              </div>
-              <h4 class="text-sm font-bold text-white">PHP</h4>
-              <p class="text-xs text-slate-400 mt-1">Backend logic, user sessions & routing</p>
-            </div>
-
-            <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/40 transition group">
-              <div class="flex items-center justify-between mb-3">
-                <i class="fas fa-database text-xl text-blue-400 group-hover:scale-110 transition"></i>
-                <span class="text-xs font-mono text-blue-400 font-bold">92%</span>
-              </div>
-              <h4 class="text-sm font-bold text-white">MySQL Database</h4>
-              <p class="text-xs text-slate-400 mt-1">Relational tables, foreign keys & schema design</p>
-            </div>
-
-            <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-amber-500/40 transition group">
-              <div class="flex items-center justify-between mb-3">
-                <i class="fas fa-fire text-2xl text-amber-500 group-hover:scale-110 transition"></i>
-                <span class="text-xs font-mono text-amber-500 font-bold">90%</span>
-              </div>
-              <h4 class="text-sm font-bold text-white">Google Firebase</h4>
-              <p class="text-xs text-slate-400 mt-1">Realtime DB, Authentication & Storage</p>
-            </div>
-
-            <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/40 transition group">
-              <div class="flex items-center justify-between mb-3">
-                <i class="fab fa-css3-alt text-2xl text-cyan-400 group-hover:scale-110 transition"></i>
-                <span class="text-xs font-mono text-cyan-400 font-bold">94%</span>
-              </div>
-              <h4 class="text-sm font-bold text-white">Tailwind CSS</h4>
-              <p class="text-xs text-slate-400 mt-1">Responsive layouts & dark UI design</p>
-            </div>
-
+          <div class="mt-4 text-center space-y-1">
+            <h3 class="text-base font-bold text-white">Ronjhay</h3>
+            <p class="text-xs font-mono text-indigo-400">Backend & Web Integrator</p>
           </div>
+        </div>
 
-          <div class="pt-4 border-t border-white/5 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="flex items-center gap-1 h-6">
-                <span class="w-1 bg-indigo-500 rounded-full bar-1"></span>
-                <span class="w-1 bg-purple-500 rounded-full bar-2"></span>
-                <span class="w-1 bg-cyan-400 rounded-full bar-3"></span>
-                <span class="w-1 bg-indigo-400 rounded-full bar-4"></span>
-                <span class="w-1 bg-emerald-400 rounded-full bar-5"></span>
-              </div>
-              <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">System Status</span>
-            </div>
-            <span class="text-xs font-mono text-emerald-400 font-bold flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Active / Available
-            </span>
+      </div>
+    </section>
+
+    <!-- CORE TECH STACK SECTION (FULL-WIDTH ROW BELOW HERO) -->
+    <section id="skills" class="scroll-mt-28 space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="w-6 h-[2px] bg-indigo-500"></span>
+          <h2 class="text-xs font-mono uppercase tracking-widest text-indigo-400">Core Tech Stack</h2>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-mono text-emerald-400">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Available for Projects
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- Skill 1: PHP -->
+        <div class="glass-card rounded-3xl p-6 space-y-3 group">
+          <div class="flex items-center justify-between">
+            <i class="fab fa-php text-3xl text-indigo-400 group-hover:scale-110 transition"></i>
+            <span class="text-xs font-mono text-indigo-400 font-bold">95%</span>
           </div>
+          <h4 class="text-sm font-bold text-white">PHP</h4>
+          <p class="text-xs text-slate-400">Backend routing, sessions & form data handling</p>
+        </div>
+
+        <!-- Skill 2: MySQL -->
+        <div class="glass-card rounded-3xl p-6 space-y-3 group">
+          <div class="flex items-center justify-between">
+            <i class="fas fa-database text-2xl text-blue-400 group-hover:scale-110 transition"></i>
+            <span class="text-xs font-mono text-blue-400 font-bold">92%</span>
+          </div>
+          <h4 class="text-sm font-bold text-white">MySQL Database</h4>
+          <p class="text-xs text-slate-400">Relational schemas, foreign keys & queries</p>
+        </div>
+
+        <!-- Skill 3: Firebase -->
+        <div class="glass-card rounded-3xl p-6 space-y-3 group">
+          <div class="flex items-center justify-between">
+            <i class="fas fa-fire text-2xl text-amber-500 group-hover:scale-110 transition"></i>
+            <span class="text-xs font-mono text-amber-500 font-bold">90%</span>
+          </div>
+          <h4 class="text-sm font-bold text-white">Google Firebase</h4>
+          <p class="text-xs text-slate-400">Realtime DB, Authentication & Storage</p>
+        </div>
+
+        <!-- Skill 4: Tailwind CSS -->
+        <div class="glass-card rounded-3xl p-6 space-y-3 group">
+          <div class="flex items-center justify-between">
+            <i class="fab fa-css3-alt text-3xl text-cyan-400 group-hover:scale-110 transition"></i>
+            <span class="text-xs font-mono text-cyan-400 font-bold">94%</span>
+          </div>
+          <h4 class="text-sm font-bold text-white">Tailwind CSS</h4>
+          <p class="text-xs text-slate-400">Responsive layouts, glassmorphism & modern UI</p>
         </div>
 
       </div>
@@ -429,7 +436,7 @@
       ];
 
       let startTime = Date.now();
-      const duration = 6000; // 6 seconds
+      const duration = 6000;
 
       function updateLoader() {
         const elapsed = Date.now() - startTime;
