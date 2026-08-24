@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ronjhay | Full-Stack Developer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .glass-card {
+      background: rgba(18, 20, 29, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+  </style>
+</head>
+<body class="bg-[#0b0d13] text-slate-200 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white pb-20">
+
+  <!-- Glow Accents Background -->
+  <div class="fixed top-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/15 blur-[140px] pointer-events-none rounded-full"></div>
+  <div class="fixed bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 blur-[140px] pointer-events-none rounded-full"></div>
+
+  <!-- Floating Island Navbar -->
+  <header class="fixed top-5 left-0 w-full z-50 px-4">
+    <nav class="max-w-4xl mx-auto h-14 rounded-full glass-card px-6 flex items-center justify-between shadow-2xl">
+      <a href="#" class="text-sm font-bold tracking-wider text-white flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse"></span>
+        Ronjhay
+      </a>
+      
+      <div class="hidden sm:flex items-center gap-6 text-xs font-medium text-slate-400">
+        <a href="#about" class="hover:text-white transition">About</a>
+        <a href="#stack" class="hover:text-white transition">Stack</a>
+        <a href="#projects" class="hover:text-white transition">Projects</a>
+      </div>
+
+      <a href="mailto:your-email@example.com" class="px-4 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition shadow-lg shadow-indigo-600/30">
+        Hire Me <i class="fas fa-arrow-right text-[10px] ml-1"></i>
+      </a>
+    </nav>
+  </header>
+
+  <!-- Main Hero + Bento Container -->
+  <main class="max-w-6xl mx-auto pt-32 px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- Left Column: Hero Text (5 Cols) -->
+      <div class="lg:col-span-5 space-y-6 pt-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 text-[11px] font-semibold tracking-wide uppercase">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+          Open for Work & Freelance
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-white leading-tight tracking-tight">
+          Full-Stack Web Developer.
+        </h1>
+
+        <p class="text-sm text-slate-400 leading-relaxed max-w-md">
+          I design and architect data-driven web applications, custom management platforms, and robust backend systems with clean interfaces.
+        </p>
+
+        <!-- CTA Buttons & Social Icons -->
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a href="#projects" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition shadow-lg shadow-indigo-600/30">
+            View Work <i class="fas fa-arrow-right ml-1 text-[10px]"></i>
+          </a>
+          <a href="#about" class="px-5 py-2.5 rounded-xl glass-card hover:bg-white/5 text-slate-300 text-xs font-semibold transition">
+            Let's Talk
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 pt-2">
+          <a href="https://github.com/ronjhay7" target="_blank" class="w-9 h-9 rounded-xl glass-card flex items-center justify-center text-slate-400 hover:text-white hover:border-indigo-500/50 transition text-sm">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-xl glass-card flex items-center justify-center text-slate-400 hover:text-white hover:border-indigo-500/50 transition text-sm">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-xl glass-card flex items-center justify-center text-slate-400 hover:text-white hover:border-indigo-500/50 transition text-sm">
+            <i class="fab fa-tiktok"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Bento Tech Stack Cards (7 Cols) -->
+      <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl" id="stack">
+        <div class="flex items-center justify-between border-b border-white/5 pb-4">
+          <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <i class="fas fa-layer-group text-indigo-400"></i> Skill Stack
+          </div>
+          <span class="text-[11px] text-slate-500 font-mono">Core Competencies</span>
+        </div>
+
+        <!-- 4-Grid Skills Box -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          
+          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-indigo-500/30 transition group">
+            <div class="flex items-center justify-between mb-3">
+              <i class="fab fa-php text-2xl text-indigo-400 group-hover:scale-110 transition"></i>
+              <span class="text-xs font-mono text-indigo-400">95%</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white">PHP & PDO Backend</h4>
+            <p class="text-xs text-slate-400 mt-1">API routing & data processing</p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-blue-500/30 transition group">
+            <div class="flex items-center justify-between mb-3">
+              <i class="fas fa-database text-xl text-blue-400 group-hover:scale-110 transition"></i>
+              <span class="text-xs font-mono text-blue-400">90%</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white">MySQL Architecture</h4>
+            <p class="text-xs text-slate-400 mt-1">Relational DB & queries</p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-cyan-500/30 transition group">
+            <div class="flex items-center justify-between mb-3">
+              <i class="fab fa-css3-alt text-2xl text-cyan-400 group-hover:scale-110 transition"></i>
+              <span class="text-xs font-mono text-cyan-400">92%</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white">Tailwind CSS</h4>
+            <p class="text-xs text-slate-400 mt-1">Modern UI & glassmorphism</p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-amber-500/30 transition group">
+            <div class="flex items-center justify-between mb-3">
+              <i class="fab fa-js text-2xl text-amber-400 group-hover:scale-110 transition"></i>
+              <span class="text-xs font-mono text-amber-400">88%</span>
+            </div>
+            <h4 class="text-sm font-semibold text-white">JavaScript & APIs</h4>
+            <p class="text-xs text-slate-400 mt-1">Client interactivity & DOM</p>
+          </div>
+
+        </div>
+
+        <!-- Wave / Activity Metric Bar -->
+        <div class="pt-2 flex items-center justify-between text-xs text-slate-400 border-t border-white/5">
+          <span class="flex items-center gap-2">
+            <i class="fas fa-chart-line text-indigo-400"></i> Full-Stack Readiness
+          </span>
+          <span class="font-mono text-white font-bold">96.8%</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Featured Projects Grid -->
+    <div class="mt-20 space-y-6" id="projects">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold text-white tracking-tight">Featured Projects</h2>
+        <a href="https://github.com/ronjhay7" target="_blank" class="text-xs font-medium text-indigo-400 hover:underline">
+          View All <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Apartment Hunting Project Card -->
+        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between hover:border-indigo-500/50 transition space-y-4">
+          <div>
+            <div class="flex items-center justify-between text-xs text-indigo-400 font-mono mb-2">
+              <span>01 / Management Platform</span>
+              <span>2026</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Apartment Hunting & Property System</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Full-stack rental discovery platform featuring dynamic location filtering, tenant-landlord-admin multi-role workflows, and administrative compliance verification.
+            </p>
+          </div>
+          <div class="pt-2 flex items-center justify-between border-t border-white/5">
+            <div class="flex gap-2 text-[11px] text-slate-400">
+              <span class="px-2 py-0.5 rounded bg-white/5">PHP</span>
+              <span class="px-2 py-0.5 rounded bg-white/5">MySQL</span>
+              <span class="px-2 py-0.5 rounded bg-white/5">Tailwind</span>
+            </div>
+            <a href="https://github.com/ronjhay7/apartment-hunting-web-app" target="_blank" class="text-xs font-bold text-white hover:text-indigo-400 transition">
+              Source Code <i class="fas fa-arrow-up-right-from-square text-[10px] ml-1"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Second Project Card -->
+        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between hover:border-indigo-500/50 transition space-y-4">
+          <div>
+            <div class="flex items-center justify-between text-xs text-teal-400 font-mono mb-2">
+              <span>02 / Telehealth Platform</span>
+              <span>2026</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">HealthConsult Management</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Healthcare scheduling and consultation system with real-time patient appointment records and role-based doctor availability status.
+            </p>
+          </div>
+          <div class="pt-2 flex items-center justify-between border-t border-white/5">
+            <div class="flex gap-2 text-[11px] text-slate-400">
+              <span class="px-2 py-0.5 rounded bg-white/5">Firebase</span>
+              <span class="px-2 py-0.5 rounded bg-white/5">JavaScript</span>
+            </div>
+            <a href="https://github.com/ronjhay7" target="_blank" class="text-xs font-bold text-white hover:text-teal-400 transition">
+              View Info <i class="fas fa-arrow-up-right-from-square text-[10px] ml-1"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
