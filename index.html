@@ -19,11 +19,11 @@
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      transform: translateZ(0); /* GPU acceleration */
+      transform: translateZ(0);
     }
     .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* Ultra-Optimized GPU Accelerated Cards (No Lag) */
+    /* Dark Mode Cards */
     .dark .glass-card {
       background: #0f121d;
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -68,7 +68,7 @@
     .float-item-1 { animation: floatBadge 4s ease-in-out infinite; }
     .float-item-2 { animation: floatBadge 5s ease-in-out infinite 1.5s; }
 
-    /* Preloader Spinner */
+    /* Preloader Spinner Animation */
     @keyframes spinBorder {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
@@ -77,6 +77,7 @@
       animation: spinBorder 1.5s linear infinite;
     }
 
+    /* Clean Preloader Fade & Slide */
     .preloader-hidden {
       opacity: 0 !important;
       visibility: hidden !important;
@@ -93,7 +94,7 @@
       50% { opacity: 0; }
     }
 
-    /* Lightweight Scroll Reveal */
+    /* Scroll Reveal */
     .reveal-on-scroll {
       opacity: 0;
       transform: translateY(20px);
@@ -108,29 +109,30 @@
 </head>
 <body class="bg-[#f8fafc] dark:bg-[#06070a] text-slate-800 dark:text-slate-300 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white transition-colors duration-200">
 
-  <!-- ================= PRELOADER (6 SECONDS) ================= -->
-  <div id="preloader" class="fixed inset-0 bg-[#06070a] z-[99999] flex flex-col justify-between items-center p-8 sm:p-12 transition-all duration-500">
-    <div class="w-full max-w-4xl flex items-center justify-between text-xs font-mono text-slate-500 uppercase tracking-widest border-b border-white/5 pb-4">
-      <div class="flex items-center gap-2">
-        <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-ping"></span>
-        <span class="text-slate-300 font-bold">RONJHAY PAGADOR</span>
+  <!-- ================= FIXED & CENTERED PRELOADER (HINDI NA HIHIWALAY O HAHABA) ================= -->
+  <div id="preloader" class="fixed inset-0 bg-[#06070a] z-[99999] flex items-center justify-center p-6 transition-all duration-500">
+    <div class="w-full max-w-sm flex flex-col items-center justify-center space-y-5 text-center">
+      
+      <!-- Top Identifier -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-indigo-400 font-mono text-[11px] uppercase tracking-widest">
+        <span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>
+        RONJHAY PAGADOR
       </div>
-      <div class="text-emerald-400 font-bold">AVAILABLE</div>
-    </div>
 
-    <div class="flex flex-col items-center justify-center space-y-6 my-auto">
-      <div class="relative w-40 h-40 sm:w-48 sm:h-48 flex items-center justify-center">
+      <!-- Center Radial Spinner & Icon -->
+      <div class="relative w-36 h-36 flex items-center justify-center my-2">
         <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-indigo-500 border-r-purple-500 border-b-cyan-400 loader-ring shadow-[0_0_20px_rgba(99,102,241,0.3)]"></div>
         <div class="absolute inset-2 rounded-full border border-dashed border-white/10"></div>
 
         <div class="flex flex-col items-center justify-center text-center z-10">
-          <i id="toolIcon" class="fab fa-php text-5xl sm:text-6xl text-indigo-400"></i>
-          <span id="loadPercent" class="mt-2 text-base sm:text-lg font-black text-white font-mono tracking-wider">0%</span>
+          <i id="toolIcon" class="fab fa-php text-4xl text-indigo-400 transition-all duration-200"></i>
+          <span id="loadPercent" class="mt-1 text-sm font-black text-white font-mono tracking-wider">0%</span>
         </div>
       </div>
 
-      <div class="text-center space-y-1">
-        <h2 id="toolName" class="text-xl sm:text-2xl font-extrabold tracking-wider text-white">
+      <!-- Active Tool Identity -->
+      <div class="space-y-1">
+        <h2 id="toolName" class="text-lg font-black tracking-wider text-white">
           PHP BACKEND
         </h2>
         <p id="toolDetail" class="text-[11px] font-mono text-indigo-400 tracking-widest uppercase">
@@ -138,7 +140,8 @@
         </p>
       </div>
 
-      <div class="w-72 sm:w-96 rounded-2xl p-3 border border-white/10 font-mono text-[11px] space-y-1 text-left shadow-xl bg-[#0e111d] text-slate-300">
+      <!-- Live Terminal Console Box -->
+      <div class="w-full rounded-2xl p-3 border border-white/10 font-mono text-[11px] space-y-1 text-left shadow-xl bg-[#0e111d] text-slate-300">
         <div class="flex items-center gap-1.5 pb-1 border-b border-white/5 text-slate-500 text-[10px]">
           <span class="w-2 h-2 rounded-full bg-red-500/60"></span>
           <span class="w-2 h-2 rounded-full bg-yellow-500/60"></span>
@@ -147,11 +150,7 @@
         </div>
         <p class="text-slate-400 truncate"><span class="text-emerald-400">status:</span> <span id="terminalLog">Getting things ready...</span></p>
       </div>
-    </div>
 
-    <div class="w-full max-w-4xl flex items-center justify-between text-xs font-mono text-slate-500 border-t border-white/5 pt-4">
-      <span>STARTING UP</span>
-      <span class="text-slate-400 font-bold">READY</span>
     </div>
   </div>
 
@@ -458,7 +457,7 @@
 
   </main>
 
-  <!-- ================= ULTRA-FAST OPTIMIZED SCRIPTS ================= -->
+  <!-- ================= SCRIPTS ================= -->
   <script>
     // 1. THEME TOGGLE
     (function() {
@@ -488,7 +487,7 @@
       });
     })();
 
-    // 2. TYPEWRITER (Low CPU load)
+    // 2. CONTINUOUS TYPEWRITER
     (function() {
       const targetText = "FULL-STACK WEB DEVELOPER";
       let charIndex = 0;
@@ -520,7 +519,7 @@
       setTimeout(typeLoop, 1000);
     })();
 
-    // 3. PRELOADER
+    // 3. PRELOADER (6s)
     (function() {
       const preloader = document.getElementById('preloader');
       const loadPercent = document.getElementById('loadPercent');
@@ -549,7 +548,7 @@
 
         const index = Math.min(5, Math.floor((progress / 100) * 6));
         if (tools[index]) {
-          if (toolIcon) toolIcon.className = tools[index].icon + ' text-5xl sm:text-6xl';
+          if (toolIcon) toolIcon.className = tools[index].icon + ' text-4xl';
           if (toolName) toolName.innerText = tools[index].name;
           if (toolDetail) toolDetail.innerText = tools[index].detail;
           if (terminalLog) terminalLog.innerText = tools[index].log;
@@ -594,7 +593,7 @@
       revealElements.forEach(el => observer.observe(el));
     }
 
-    // 5. LIGHTWEIGHT HIGH-FPS PARTICLES (Low memory footprint)
+    // 5. LIGHTWEIGHT HIGH-FPS PARTICLES
     (function() {
       const canvas = document.getElementById('particleCanvas');
       if (!canvas) return;
@@ -606,7 +605,7 @@
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
         particles = [];
-        const count = Math.min(30, Math.floor(width / 45)); // Balanced count
+        const count = Math.min(30, Math.floor(width / 45));
         for (let i = 0; i < count; i++) {
           particles.push({
             x: Math.random() * width,
